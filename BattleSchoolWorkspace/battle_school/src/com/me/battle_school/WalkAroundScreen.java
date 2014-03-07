@@ -18,7 +18,8 @@ public class WalkAroundScreen extends AbstractScreen implements InputProcessor{
 	private WorldRenderer renderer; 
 	private WorldController controller; 
 	
-	private int width, height; 
+	private int width, height;
+	private static int screenWidth, screenHeight; 
 
 	
 	public WalkAroundScreen(BattleSchool game) {
@@ -52,6 +53,8 @@ public class WalkAroundScreen extends AbstractScreen implements InputProcessor{
 		renderer.setSize(width, height);
 		this.width = width; 
 		this.height = height; 
+		screenHeight = height; 
+		screenWidth = width; 
 	}
 
 	@Override
@@ -118,11 +121,19 @@ public class WalkAroundScreen extends AbstractScreen implements InputProcessor{
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 //		if (!Gdx.app.getType().equals(ApplicationType.Android))
 //			return false;
-		if(screenX < width/2 && screenY > height/2){
+		int x_width = width/3; 
+		int y_width = height/3;
+		if(screenX < x_width && screenY > y_width && screenY < 2*y_width){
 			controller.leftPressed();
 		}
-		else if(screenX > width/2 && screenY > height/2){
+		else if(screenX > 2*x_width && screenY > y_width && screenY < 2*y_width){
 			controller.rightPressed(); 
+		}
+		else if(screenX > x_width && screenX < 2*x_width && screenY < y_width) {
+			controller.upPressed(); 
+		}
+		else if(screenX > x_width && screenX < 2*x_width && screenY > 2*y_width) {
+			controller.downPressed(); 
 		}
 		return true;
 	}
@@ -132,13 +143,21 @@ public class WalkAroundScreen extends AbstractScreen implements InputProcessor{
 //		if (!Gdx.app.getType().equals(ApplicationType.Android))
 //			return false;
 		//BAG: if click at certain area 
-		if(screenX < width/2 && screenY > height/2){
+		int x_width = width/3; 
+		int y_width = height/3;
+		if(screenX < x_width && screenY > y_width && screenY < 2*y_width){
 			controller.leftReleased();
 		}
-		else if(screenX > width/2 && screenY > height/2){
+		else if(screenX > 2*x_width && screenY > y_width && screenY < 2*y_width){
 			controller.rightReleased(); 
 		}
-		return true; 
+		else if(screenX > x_width && screenX < 2*x_width && screenY < y_width) {
+			controller.upReleased(); 
+		}
+		else if(screenX > x_width && screenX < 2*x_width && screenY > 2*y_width) {
+			controller.downReleased(); 
+		}
+		return true;	
 	}
 
 	@Override
@@ -157,6 +176,14 @@ public class WalkAroundScreen extends AbstractScreen implements InputProcessor{
 	public boolean scrolled(int amount) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	//for controller to check for screen boundary
+	public static int getScreenWidth(){
+		return screenWidth; 
+	}
+	public static int getScreenHeight(){
+		return screenHeight; 
 	}
 
 }
