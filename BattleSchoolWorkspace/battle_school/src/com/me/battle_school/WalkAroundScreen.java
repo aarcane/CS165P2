@@ -145,7 +145,11 @@ public class WalkAroundScreen extends AbstractScreen implements InputProcessor{
 		//BAG: if click at certain area 
 		int x_width = width/3; 
 		int y_width = height/3;
-		if(screenX < x_width && screenY > y_width && screenY < 2*y_width){
+		System.out.println(screenX + ", " + screenY);
+		if( screenX < 50 && screenY > 280) {
+			game.setScreen( new BagScreen(game) );
+		}
+		else if(screenX < x_width && screenY > y_width && screenY < 2*y_width){
 			controller.leftReleased();
 		}
 		else if(screenX > 2*x_width && screenY > y_width && screenY < 2*y_width){
