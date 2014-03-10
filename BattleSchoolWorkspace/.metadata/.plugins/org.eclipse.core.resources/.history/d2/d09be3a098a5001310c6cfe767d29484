@@ -82,7 +82,7 @@ public class WorldController {
 	private void processInput(){
 		if(keys.get(Keys.LEFT)){
 			//left is pressed
-//			System.out.println(player.getPosition().x + ", " + player.getPosition().y); 
+			System.out.println(player.getPosition().x + ", " + player.getPosition().y); 
 			player.setFacingLeft(true);
 			player.setFacingUp(false);
 			player.setState(State.WALKING_X); 
@@ -94,7 +94,6 @@ public class WorldController {
 		}
 		if(keys.get(Keys.RIGHT)){
 			//right is pressed
-//			System.out.println(player.getPosition().x + ", " + player.getPosition().y); 
 			player.setFacingLeft(false); 
 			player.setFacingUp(false);
 			player.setState(State.WALKING_X); 
@@ -107,7 +106,7 @@ public class WorldController {
 		//**NEED TO IMPLEMENT Y DIRECTION**//
 		if(keys.get(Keys.UP)){
 			//up is pressed
-//			System.out.println(player.getPosition().x + ", " + player.getPosition().y); 
+			System.out.println(player.getPosition().x + ", " + player.getPosition().y); 
 			player.setFacingUp(true); 
 			player.setFacingLeft(false);
 			player.setState(State.WALKING_Y);
@@ -118,7 +117,7 @@ public class WorldController {
 			}
 		}
 		if(keys.get(Keys.DOWN)){
-//			System.out.println(player.getPosition().x + ", " + player.getPosition().y); 
+			System.out.println(player.getPosition().x + ", " + player.getPosition().y); 
 			player.setFacingUp(false); 
 			player.setFacingLeft(false);
 			player.setState(State.WALKING_Y); 

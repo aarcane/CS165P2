@@ -45,14 +45,6 @@ public class Player {
 	public Vector2 getVelocity(){
 		return velocity; 
 	}
-	
-	public void setPositionX(float x){
-		position.x = x; 
-	}
-	
-	public void setPositionY(float y) {
-		position.y = y; 
-	}
 
 	public void setFacingUp(boolean bool) {
 		facingUp = bool; 

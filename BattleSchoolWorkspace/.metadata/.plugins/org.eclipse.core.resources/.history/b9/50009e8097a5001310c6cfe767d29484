@@ -49,10 +49,6 @@ public class Player {
 	public void setPositionX(float x){
 		position.x = x; 
 	}
-	
-	public void setPositionY(float y) {
-		position.y = y; 
-	}
 
 	public void setFacingUp(boolean bool) {
 		facingUp = bool; 
