@@ -136,7 +136,7 @@ public class WorldRenderer {
 	}
 
 	private void drawBag() {
-		spriteBatch.draw(bagTexture, 1f, 1f);
+		spriteBatch.draw(bagTexture, 10f, 10f);
 	}
 	public void drawDebug() {
 		// render blocks

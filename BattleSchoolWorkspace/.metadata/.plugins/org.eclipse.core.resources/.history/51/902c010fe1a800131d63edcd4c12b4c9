@@ -95,7 +95,7 @@ public class WorldRenderer {
 		blockTexture = new Texture(Gdx.files.internal("images/road.png"));
 		
 		//bag texture
-		bagTexture = new Texture(Gdx.files.internal("images/bag.png"));
+		bagTexture = new Texture(Gdx.files.internal("images/bob_01.png"));
 	}
 
 	public void render() {
@@ -136,7 +136,7 @@ public class WorldRenderer {
 	}
 
 	private void drawBag() {
-		spriteBatch.draw(bagTexture, 1f, 1f);
+		spriteBatch.draw(bagTexture, 10f, 10f);
 	}
 	public void drawDebug() {
 		// render blocks
