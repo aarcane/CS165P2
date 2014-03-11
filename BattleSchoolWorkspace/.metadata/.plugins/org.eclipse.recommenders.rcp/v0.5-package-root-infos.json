@@ -1,18 +1,5 @@
 [
   {
-    "symbolicName": "gdx",
-    "version": {
-      "major": -1,
-      "minor": -1,
-      "micro": -1,
-      "qualifier": ""
-    },
-    "jarFileFingerprint": "c12063c9c6255db218bffe1744026fee4480ce95",
-    "jarFileModificationDate": "2013-04-16T06:38:24-07:00",
-    "location": "C:\\Users\\Jon\\eclipse\\BattleSchoolWorkspace\\obviam-star-assault\\star-assault\\libs\\gdx.jar",
-    "javaRuntime": false
-  },
-  {
     "symbolicName": "jre",
     "version": {
       "major": 1,
@@ -20,25 +7,12 @@
       "micro": 0,
       "qualifier": ""
     },
-    "jarFileFingerprint": "ce91d81cc010ee151a0f39eeba7da64264520b5a",
-    "jarFileModificationDate": "2012-05-22T02:24:48.600-07:00",
+    "jarFileFingerprint": "77bd608695729215acd4605d676ca72414c30ec9",
+    "jarFileModificationDate": "2014-03-01T19:29:53.372-08:00",
     "location": "C:\\Program Files\\Java\\jre7\\lib\\jsse.jar",
     "javaRuntime": true
   },
   {
-    "symbolicName": "gdx-backend-lwjgl-natives",
-    "version": {
-      "major": -1,
-      "minor": -1,
-      "micro": -1,
-      "qualifier": ""
-    },
-    "jarFileFingerprint": "c539f2c7d14189f5dc57306727587d1184e17773",
-    "jarFileModificationDate": "2014-02-14T15:21:40-08:00",
-    "location": "C:\\Users\\Jon\\eclipse\\BattleSchoolWorkspace\\battle_school-desktop\\libs\\gdx-backend-lwjgl-natives.jar",
-    "javaRuntime": false
-  },
-  {
     "symbolicName": "jre",
     "version": {
       "major": 1,
@@ -46,8 +20,8 @@
       "micro": 0,
       "qualifier": ""
     },
-    "jarFileFingerprint": "8ab70018b7c6822f245353448cdf35b4acba7f91",
-    "jarFileModificationDate": "2012-05-22T02:24:47.158-07:00",
+    "jarFileFingerprint": "4c767f7289dd16427acc3063ffe603cf04536616",
+    "jarFileModificationDate": "2014-03-01T19:29:49.745-08:00",
     "location": "C:\\Program Files\\Java\\jre7\\lib\\ext\\zipfs.jar",
     "javaRuntime": true
   },
@@ -59,9 +33,9 @@
       "micro": 0,
       "qualifier": ""
     },
-    "jarFileFingerprint": "d13be429951d3453ad25ae4bc2d482d7a6b7dfd2",
-    "jarFileModificationDate": "2012-05-22T02:24:48.620-07:00",
-    "location": "C:\\Program Files\\Java\\jre7\\lib\\ext\\localedata.jar",
+    "jarFileFingerprint": "18121f376b70a5b13ab36e9859aa7be525114849",
+    "jarFileModificationDate": "2014-03-01T19:29:49.739-08:00",
+    "location": "C:\\Program Files\\Java\\jre7\\lib\\ext\\access-bridge-64.jar",
     "javaRuntime": true
   },
   {
@@ -72,8 +46,34 @@
       "micro": 0,
       "qualifier": ""
     },
-    "jarFileFingerprint": "57266bf8fb3bb8354d4d9e0beead243972a127a8",
-    "jarFileModificationDate": "2012-05-22T02:24:47.151-07:00",
+    "jarFileFingerprint": "e3af979dda031dde41baa0876249af5a6e5c4d4a",
+    "jarFileModificationDate": "2014-03-01T19:29:53.394-08:00",
+    "location": "C:\\Program Files\\Java\\jre7\\lib\\ext\\localedata.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "android",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "e8f132406a3a24842242815287e32bb1d7ed0b97",
+    "jarFileModificationDate": "2014-01-31T00:38:17.505-08:00",
+    "location": "C:\\Users\\Ariel\\MyDevelopment\\adt-bundle-windows-x86_64-20131030\\sdk\\platforms\\android-19\\android.jar",
+    "javaRuntime": false
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "46f537010a194c3f1b4cf5fa708758efa2a93b72",
+    "jarFileModificationDate": "2014-03-01T19:29:49.740-08:00",
     "location": "C:\\Program Files\\Java\\jre7\\lib\\ext\\dnsns.jar",
     "javaRuntime": true
   },
@@ -85,10 +85,23 @@
       "micro": 0,
       "qualifier": ""
     },
-    "jarFileFingerprint": "f56383db77ae9502e6ca617e57d55ee73d631c46",
-    "jarFileModificationDate": "2012-05-22T02:24:47.153-07:00",
+    "jarFileFingerprint": "95dc9053062d68cde4e8c38494cc63aefd7b0a42",
+    "jarFileModificationDate": "2014-03-01T19:29:49.743-08:00",
     "location": "C:\\Program Files\\Java\\jre7\\lib\\ext\\sunec.jar",
     "javaRuntime": true
+  },
+  {
+    "symbolicName": "gdx-backend-android",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "e6ed10fcab343a4b6c0663c7445399306b8ed366",
+    "jarFileModificationDate": "2014-02-14T15:21:40-08:00",
+    "location": "C:\\Users\\Ariel\\MyWorkspaces\\113git\\BattleSchoolWorkspace\\battle_school-android\\libs\\gdx-backend-android.jar",
+    "javaRuntime": false
   },
   {
     "symbolicName": "jre",
@@ -98,8 +111,8 @@
       "micro": 0,
       "qualifier": ""
     },
-    "jarFileFingerprint": "9c65be66b7d064aa969eed550ce6bca0c930fd4c",
-    "jarFileModificationDate": "2012-05-22T02:24:47.169-07:00",
+    "jarFileFingerprint": "be4124ecceb37230419f0f31ea6e7d50babb4973",
+    "jarFileModificationDate": "2014-03-01T19:29:49.764-08:00",
     "location": "C:\\Program Files\\Java\\jre7\\lib\\jce.jar",
     "javaRuntime": true
   },
@@ -111,61 +124,22 @@
       "micro": 0,
       "qualifier": ""
     },
-    "jarFileFingerprint": "4838808e80df811cfb2bf7faf361b3cbc16f9f81",
-    "jarFileModificationDate": "2011-08-30T23:05:02-07:00",
-    "location": "C:\\Program Files\\Java\\jre7\\lib\\ext\\dns_sd.jar",
-    "javaRuntime": true
-  },
-  {
-    "symbolicName": "gdx",
-    "version": {
-      "major": -1,
-      "minor": -1,
-      "micro": -1,
-      "qualifier": ""
-    },
-    "jarFileFingerprint": "e9caaf3e96b0fc1d60db9f80ca30091d63fa08c8",
-    "jarFileModificationDate": "2014-02-14T15:21:40-08:00",
-    "location": "C:\\Users\\Jon\\eclipse\\BattleSchoolWorkspace\\battle_school\\libs\\gdx.jar",
-    "javaRuntime": false
-  },
-  {
-    "symbolicName": "gdx-backend-lwjgl",
-    "version": {
-      "major": -1,
-      "minor": -1,
-      "micro": -1,
-      "qualifier": ""
-    },
-    "jarFileFingerprint": "83bc4d374fa305db0fd13dcd8acf03335084c5c2",
-    "jarFileModificationDate": "2013-04-16T06:38:24-07:00",
-    "location": "C:\\Users\\Jon\\eclipse\\BattleSchoolWorkspace\\obviam-star-assault\\star-assault-desktop\\libs\\gdx-backend-lwjgl.jar",
-    "javaRuntime": false
-  },
-  {
-    "symbolicName": "jre",
-    "version": {
-      "major": 1,
-      "minor": 0,
-      "micro": 0,
-      "qualifier": ""
-    },
-    "jarFileFingerprint": "ab17247aed6560aeb2b64a93f5d864e8ac8d63ab",
-    "jarFileModificationDate": "2012-05-22T02:24:48.462-07:00",
-    "location": "C:\\Program Files\\Java\\jre7\\lib\\charsets.jar",
-    "javaRuntime": true
-  },
-  {
-    "symbolicName": "jre",
-    "version": {
-      "major": 1,
-      "minor": 0,
-      "micro": 0,
-      "qualifier": ""
-    },
-    "jarFileFingerprint": "70020954a878f151d863091253774186b91b4ac2",
-    "jarFileModificationDate": "2012-05-22T02:24:47.158-07:00",
+    "jarFileFingerprint": "a3d1a9689f1c8e36ab64fb669df92076771c42f2",
+    "jarFileModificationDate": "2014-03-01T19:29:49.745-08:00",
     "location": "C:\\Program Files\\Java\\jre7\\lib\\ext\\sunmscapi.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "9767102169f700ff98216c67e9c3c9575d2fd226",
+    "jarFileModificationDate": "2014-03-01T19:29:53.206-08:00",
+    "location": "C:\\Program Files\\Java\\jre7\\lib\\charsets.jar",
     "javaRuntime": true
   },
   {
@@ -178,7 +152,7 @@
     },
     "jarFileFingerprint": "c77e35b34755033194881996824ab30a18352ad6",
     "jarFileModificationDate": "2014-02-14T15:21:40-08:00",
-    "location": "C:\\Users\\Jon\\eclipse\\BattleSchoolWorkspace\\battle_school-desktop\\libs\\gdx-backend-lwjgl.jar",
+    "location": "C:\\Users\\Ariel\\MyWorkspaces\\113git\\BattleSchoolWorkspace\\battle_school-desktop\\libs\\gdx-backend-lwjgl.jar",
     "javaRuntime": false
   },
   {
@@ -191,33 +165,20 @@
     },
     "jarFileFingerprint": "d3f888ccffe47cd0ecdeaad539ea1fb81a58aef8",
     "jarFileModificationDate": "2014-02-14T15:21:40-08:00",
-    "location": "C:\\Users\\Jon\\eclipse\\BattleSchoolWorkspace\\battle_school-desktop\\libs\\gdx-natives.jar",
+    "location": "C:\\Users\\Ariel\\MyWorkspaces\\113git\\BattleSchoolWorkspace\\battle_school-desktop\\libs\\gdx-natives.jar",
     "javaRuntime": false
   },
   {
-    "symbolicName": "jre",
-    "version": {
-      "major": 1,
-      "minor": 0,
-      "micro": 0,
-      "qualifier": ""
-    },
-    "jarFileFingerprint": "7c2111e7c48d71b238733e705be031aaf83fb3c5",
-    "jarFileModificationDate": "2012-05-22T02:24:47.170-07:00",
-    "location": "C:\\Program Files\\Java\\jre7\\lib\\jfr.jar",
-    "javaRuntime": true
-  },
-  {
-    "symbolicName": "gdx-natives",
+    "symbolicName": "gdx-backend-lwjgl-natives",
     "version": {
       "major": -1,
       "minor": -1,
       "micro": -1,
       "qualifier": ""
     },
-    "jarFileFingerprint": "d37fa03987fe8c87247047e0f8cec1ce82b90012",
-    "jarFileModificationDate": "2013-04-16T06:38:24-07:00",
-    "location": "C:\\Users\\Jon\\eclipse\\BattleSchoolWorkspace\\obviam-star-assault\\star-assault-desktop\\libs\\gdx-natives.jar",
+    "jarFileFingerprint": "c539f2c7d14189f5dc57306727587d1184e17773",
+    "jarFileModificationDate": "2014-02-14T15:21:40-08:00",
+    "location": "C:\\Users\\Ariel\\MyWorkspaces\\113git\\BattleSchoolWorkspace\\battle_school-desktop\\libs\\gdx-backend-lwjgl-natives.jar",
     "javaRuntime": false
   },
   {
@@ -228,8 +189,47 @@
       "micro": 0,
       "qualifier": ""
     },
-    "jarFileFingerprint": "0be02ebdf8ff64d424eff57817087b5ffc36a27d",
-    "jarFileModificationDate": "2012-05-22T02:24:48.416-07:00",
+    "jarFileFingerprint": "4a87e4caa30fe9f43e388d12f0766fb532e0c912",
+    "jarFileModificationDate": "2014-03-01T19:29:49.766-08:00",
+    "location": "C:\\Program Files\\Java\\jre7\\lib\\jfr.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "59685bead3fa4101bb13280f1a04ac98b7888e01",
+    "jarFileModificationDate": "2014-03-01T19:29:49.740-08:00",
+    "location": "C:\\Program Files\\Java\\jre7\\lib\\ext\\jaccess.jar",
+    "javaRuntime": true
+  },
+  {
+    "symbolicName": "gdx",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "e9caaf3e96b0fc1d60db9f80ca30091d63fa08c8",
+    "jarFileModificationDate": "2014-02-14T15:21:40-08:00",
+    "location": "C:\\Users\\Ariel\\MyWorkspaces\\113git\\BattleSchoolWorkspace\\battle_school\\libs\\gdx.jar",
+    "javaRuntime": false
+  },
+  {
+    "symbolicName": "jre",
+    "version": {
+      "major": 1,
+      "minor": 0,
+      "micro": 0,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "9571d0658081d6d769493ce3c7260cfc642f1f7c",
+    "jarFileModificationDate": "2014-03-01T19:29:53.157-08:00",
     "location": "C:\\Program Files\\Java\\jre7\\lib\\rt.jar",
     "javaRuntime": true
   },
@@ -241,8 +241,8 @@
       "micro": 0,
       "qualifier": ""
     },
-    "jarFileFingerprint": "38e870b3225eafd63e91ea5d78f3769d74ec91b3",
-    "jarFileModificationDate": "2012-05-22T02:24:47.177-07:00",
+    "jarFileFingerprint": "97232c0d837b619a3d5612873718d20c38b2307a",
+    "jarFileModificationDate": "2014-03-01T19:29:49.988-08:00",
     "location": "C:\\Program Files\\Java\\jre7\\lib\\resources.jar",
     "javaRuntime": true
   },
@@ -254,22 +254,22 @@
       "micro": 0,
       "qualifier": ""
     },
-    "jarFileFingerprint": "ececf755ad0be59e88e5cbd67f333420e0cea3a7",
-    "jarFileModificationDate": "2012-05-22T02:24:47.157-07:00",
+    "jarFileFingerprint": "1826204b0e05aef412b595321866f7d190e0498d",
+    "jarFileModificationDate": "2014-03-01T19:29:49.744-08:00",
     "location": "C:\\Program Files\\Java\\jre7\\lib\\ext\\sunjce_provider.jar",
     "javaRuntime": true
   },
   {
-    "symbolicName": "gdx-backend-lwjgl-natives",
+    "symbolicName": "gdx-backend-android-sources",
     "version": {
       "major": -1,
       "minor": -1,
       "micro": -1,
       "qualifier": ""
     },
-    "jarFileFingerprint": "cd4fc882244cac9353adaf45c0ec153eecd2fb7d",
-    "jarFileModificationDate": "2013-04-16T06:38:24-07:00",
-    "location": "C:\\Users\\Jon\\eclipse\\BattleSchoolWorkspace\\obviam-star-assault\\star-assault-desktop\\libs\\gdx-backend-lwjgl-natives.jar",
+    "jarFileFingerprint": "698b05ecb2f20461569bbff285f2f7878cc39ef2",
+    "jarFileModificationDate": "2014-02-14T15:21:40-08:00",
+    "location": "C:\\Users\\Ariel\\MyWorkspaces\\113git\\BattleSchoolWorkspace\\battle_school-android\\libs\\gdx-backend-android-sources.jar",
     "javaRuntime": false
   }
 ]
