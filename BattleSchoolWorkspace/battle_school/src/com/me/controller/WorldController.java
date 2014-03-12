@@ -3,6 +3,7 @@ package com.me.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.me.battle_school.Bag;
 import com.me.battle_school.Player;
 import com.me.battle_school.Player.State;
 import com.me.battle_school.World;
@@ -14,7 +15,8 @@ public class WorldController {
 	}
 	
 	private World world; 
-	private Player player; 
+	private Player player;
+	private Bag bag;
 	
 	static Map<Keys, Boolean> keys = new HashMap<WorldController.Keys, Boolean>(); 
 	static {
@@ -27,7 +29,8 @@ public class WorldController {
 	
 	public WorldController(World world){
 		this.world = world; 
-		this.player = world.getPlayer(); 
+		this.player = world.getPlayer();
+		this.bag = world.getBag();
 	}
 
 	//** Key presses and touches ***//
@@ -74,9 +77,16 @@ public class WorldController {
 
 	//*the main update method**//
 	public void update(float delta){
-		processInput(); 
+		processInput();
 		player.update(delta);
+		bag.update(delta);
 	}
+	/*public boolean isPressed(){
+		if(keys.put(Keys.DOWN,false)&&keys.put(Keys.RIGHT,false)&&keys.put(Keys.LEFT,false)&&keys.put(Keys.UP,false)){
+			return false;
+		}
+		else return true;
+	}*/
 	
 	//**change player's state and params based on input controls **//
 	private void processInput(){

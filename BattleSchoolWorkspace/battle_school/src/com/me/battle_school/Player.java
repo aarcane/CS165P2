@@ -11,7 +11,7 @@ public class Player {
 	}
 	
 	public static final float SPEED = 0.1f; //unit per second
-	public static final float HEIGHT = 1f; //1.5 unit tall
+	public static final float HEIGHT = 1f; //1 unit tall
 	public static final float WIDTH = 1f; //1 unit fat
 	
 	Vector2 position = new Vector2(); 
@@ -19,14 +19,15 @@ public class Player {
 	Rectangle bounds = new Rectangle(); 
 	State state = State.IDLE; 
 	boolean facingLeft = true; 
-	boolean facingUp = false; 
-	
-	float stateTime = 0; 
+	boolean facingUp = false;
+	boolean talking = false;
+	float stateTime = 0;
 	
 	public Player(Vector2 position) {
-		this.position = position; 
+		this.position = position;
 		this.bounds.height = HEIGHT; 
-		this.bounds.width = WIDTH; 
+		this.bounds.width = WIDTH;
+		
 	}
 	
 	public Rectangle getBounds(){
@@ -45,14 +46,6 @@ public class Player {
 	public Vector2 getVelocity(){
 		return velocity; 
 	}
-	
-	public void setPositionX(float x){
-		position.x = x; 
-	}
-	
-	public void setPositionY(float y) {
-		position.y = y; 
-	}
 
 	public void setFacingUp(boolean bool) {
 		facingUp = bool; 
@@ -60,6 +53,10 @@ public class Player {
 
 	public void setFacingLeft(boolean bool) {
 		facingLeft = bool; 
+	}
+	
+	public void setTalking(boolean bool){
+		talking = bool;
 	}
 
 	public void setState(State newState) {
@@ -81,9 +78,19 @@ public class Player {
 		return state;
 	}
 
+	
 	public boolean isFacingUp() {
 		// TODO Auto-generated method stub
 		return facingUp;
+	}
+
+	public void setPositionY(float pos) {
+		// TODO Auto-generated method stub
+		position.y=pos;
+	}
+	public void setPositionX(float pos) {
+		// TODO Auto-generated method stub
+		position.x=pos;
 	}
 
 }

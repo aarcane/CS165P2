@@ -1,0 +1,16 @@
+package com.me.battle_school;
+
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.graphics.Texture;
+
+public class BattleSchool extends Game {
+
+	public static final String LOG = "BattleSchool Log: ";
+
+	@Override
+	public void create() {
+		Texture.setEnforcePotImages(false);
+		setScreen(new WalkAroundScreen()); 
+	}
+
+}

@@ -1,0 +1,14 @@
+package com.me.battle_school;
+
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.graphics.Texture;
+
+public class BattleSchool extends Game {
+
+	@Override
+	public void create() {
+		setScreen(new WalkAroundScene()); 
+		Texture.setEnforcePotImages(false);
+	}
+
+}

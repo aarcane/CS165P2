@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.me.battle_school.Player.State;
 
 public class WorldRenderer {
@@ -22,15 +23,15 @@ public class WorldRenderer {
 	private static final float CAMERA_HEIGHT = 7f;
 
 	private World world;
-	private OrthographicCamera cam;
+	//private OrthographicCamera cam;
 
 	/* for debug rendering */
 	ShapeRenderer debugRenderer = new ShapeRenderer();
 
 	/** Textures **/
-	private Texture bagTexture; 
 	private Texture playerTexture; // player walking texture
 	private Texture blockTexture;
+	private Texture bagTexture;
 	Animation walkingUp;
 	Animation walkingDown;
 	Animation walkingRight;
@@ -39,7 +40,11 @@ public class WorldRenderer {
 	TextureRegion[] walkFramesDown;
 	TextureRegion[] walkFramesLeft;
 	TextureRegion[] walkFramesRight;
-	TextureRegion stance; 
+	TextureRegion stance;
+	OrthographicCamera camera;
+	Player player;
+	Database data;
+	boolean bagOpen;
 	int row = 4;
 	int col = 4;
 
@@ -50,25 +55,28 @@ public class WorldRenderer {
 	private float ppuX; // pixels per unit on the X axis
 	private float ppuY; // pixels per unit on Y axis
 	private float stateTime;
-
+	
+	private Bag bag;
+	
 	public void setSize(int w, int h) {
 		this.width = w;
 		this.height = h;
 		ppuX = (float) width / CAMERA_WIDTH;
 		ppuY = (float) height / CAMERA_HEIGHT;
+		
 	}
 
-	public WorldRenderer(World world, boolean debug) {
+	public WorldRenderer(World world, Database data, boolean debug) {
 		this.world = world;
-		this.cam = new OrthographicCamera(CAMERA_WIDTH, CAMERA_HEIGHT);
-		this.cam.position.set(CAMERA_WIDTH / 2f, CAMERA_HEIGHT / 2f, 0);
-		this.cam.update();
 		this.debug = debug;
+		this.data = data;
 		spriteBatch = new SpriteBatch();
 		loadTextures();
+		bagOpen=false;
 	}
 
 	public void loadTextures() {
+		bagTexture = new Texture(Gdx.files.internal("images/bag.png"));
 		playerTexture = new Texture(Gdx.files.internal("images/walk.png"));
 		TextureRegion[][] temp = TextureRegion
 				.split(playerTexture, playerTexture.getWidth() / col,
@@ -87,31 +95,46 @@ public class WorldRenderer {
 		walkingUp = new Animation(.025f, walkFramesUp);
 		walkingRight = new Animation(.025f, walkFramesRight);
 		walkingLeft = new Animation(.025f, walkFramesLeft);
-		
 		stance = walkingDown.getKeyFrame(0); 
 		stateTime = 0f; 
-		
+		camera = world.getCamera();
+		player = world.getPlayer();
 		//block texture
 		blockTexture = new Texture(Gdx.files.internal("images/road.png"));
-		
-		//bag texture
-		bagTexture = new Texture(Gdx.files.internal("images/bag.png"));
+		bag=world.getBag();
 	}
 
 	public void render() {
+		
 		spriteBatch.begin();
 		drawBlocks();
 		drawPlayer();
-		drawBag(); 
-		spriteBatch.end();
+		if (debug){
+		drawDebug();}
+		camera.position.set(player.getPosition().x, player.getPosition().y, 0);
+		//System.out.println("X:"+player.getPosition().x+" Y:"+player.getPosition().y);
+		camera.update();
+		//world.camera.update();
+		Vector2 touchPos = new Vector2();
 		
-		if (debug)
-			drawDebug();
+		if(Gdx.input.isTouched()){
+			touchPos.set(Gdx.input.getX(), 320 -Gdx.input.getY());
+		}
+		else{
+			touchPos.set(100000, 1000000);
+		}
+//		System.out.println(Gdx.input.getX()+" "+Gdx.input.getY());
+//		System.out.println(touchPos.x+" "+touchPos.y);
+		spriteBatch.draw(bagTexture, bag.getPosition().x, bag.getPosition().y);
+		if((bag.getBounds().getWidth()*ppuX)>touchPos.x&&(bag.getBounds().getHeight()*ppuY)>(touchPos.y)){
+			bagOpen=true;
+		}
+		
+		spriteBatch.end();
 //		cam.position.set(world.getPlayer().getPosition().x+Player.HEIGHT/2, world.getPlayer().getPosition().y+Player.WIDTH/2, 0);
 	}
 
 	private void drawPlayer() {
-		Player player = world.getPlayer();
 		if (player.getState().equals(State.WALKING_X)) {
 			stance = player.isFacingLeft() ? walkingLeft.getKeyFrame(
 					player.getStateTime()/4, true) : walkingRight.getKeyFrame(
@@ -122,11 +145,11 @@ public class WorldRenderer {
 					player.getStateTime()/4, true) : walkingDown.getKeyFrame(
 					player.getStateTime()/4, true);
 		}
-		spriteBatch.draw(stance, player.getPosition().x * ppuX,
-				player.getPosition().y * ppuY, Player.WIDTH * ppuX,
-				Player.HEIGHT * ppuY);
+		spriteBatch.draw(stance, player.getPosition().x * ppuX, player.getPosition().y * ppuY, Player.WIDTH * ppuX, Player.HEIGHT * ppuY);
+		
+		
 	}
-
+	
 	private void drawBlocks() {
 		for (Block block : world.getBlocks()) {
 			spriteBatch.draw(blockTexture, block.getPosition().x * ppuX,
@@ -135,12 +158,13 @@ public class WorldRenderer {
 		}
 	}
 
-	private void drawBag() {
-		spriteBatch.draw(bagTexture, 1f, 1f);
+	public boolean isBagOpen(){
+		return bagOpen;
 	}
+	
 	public void drawDebug() {
 		// render blocks
-		debugRenderer.setProjectionMatrix(cam.combined);
+		debugRenderer.setProjectionMatrix(world.camera.combined);
 		debugRenderer.begin(ShapeType.Line);
 		for (Block block : world.getBlocks()) {
 			Rectangle rect = block.getBounds();
@@ -161,4 +185,6 @@ public class WorldRenderer {
 
 	}
 	
+
+
 }

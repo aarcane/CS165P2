@@ -18,11 +18,11 @@ public class BattleSchool extends Game {
 		Gdx.app.log(BattleSchool.LOG, "creating game");
 		fpsLogger = new FPSLogger(); 
 //		setScreen(new WalkAroundScreen(this)); 
-		setScreen(getSplashScreen()); 
+		setScreen(getKeyScreen()); 
 	}
 	
-	public SplashScreen getSplashScreen() {
-		return new SplashScreen(this); 
+	public KeyScreen getKeyScreen() {
+		return new KeyScreen(this); 
 	}
 
 }
