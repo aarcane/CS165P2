@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.me.battle_school.WalkAroundScene&apos; to &apos;WalkAroundScreen&apos;&#x0D;&#x0A;- Original project: &apos;battle_school&apos;&#x0D;&#x0A;- Original element: &apos;com.me.battle_school.WalkAroundScene&apos;&#x0D;&#x0A;- Renamed element: &apos;com.me.battle_school.WalkAroundScreen&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;WalkAroundScene&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;com.me.battle_school{WalkAroundScene.java[WalkAroundScene" matchStrategy="1" name="WalkAroundScreen" qualified="false" references="true" similarDeclarations="false" stamp="1393123623958" textual="false" version="1.0"/>
+</session>
