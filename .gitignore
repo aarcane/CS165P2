@@ -19,3 +19,11 @@
 *.exe
 *.out
 *.app
+
+# Backup files
+*~
+*bak
+*swp
+
+# Main executables
+P2/isPrime
