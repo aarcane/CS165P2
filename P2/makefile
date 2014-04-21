@@ -4,7 +4,7 @@ LD=g++
 CXXFLAGS=$(CFLAGS) -std=c++11
 CFLAGS=-c -Wall -Werror -O3
 LDFLAGS=
-CXXSOURCES=main.cpp integer.cpp integer_iostream.cpp integer_mul.cpp isPrime.cpp jacobi.cpp
+CXXSOURCES=main.cpp integer.cpp integer_iostream.cpp integer_mul.cpp isPrime.cpp nextPrime.cpp jacobi.cpp
 CSOURCES=
 CXXOBJECTS=$(CXXSOURCES:.cpp=.o)
 COBJECTS=$(CSOURCES:.c=.o)

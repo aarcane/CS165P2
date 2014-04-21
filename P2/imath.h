@@ -7,9 +7,9 @@
 integer jacobi(integer x, integer y);
 
 //return the factor, if found, or 1 if probably prime.
-integer isPrime(integer x, integer k);
+integer isPrime(const integer& x, const integer& k);
 
 // return the first suspected prime >= x.
-integer nextPrime(integer x, integer prime);
-integer nextPrime(integer x);
+integer nextPrime(const integer& x, const integer& prime);
+integer nextPrime(const integer& x);
 #endif //imath.h
