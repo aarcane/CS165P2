@@ -7,7 +7,7 @@
 integer jacobi(integer x, integer y);
 
 //return the factor, if found, or 1 if probably prime.
-integer isPrime(const integer& x, const integer& k);
+bool isPrime(const integer& x, const integer& k);
 
 // return the first suspected prime >= x.
 integer nextPrime(const integer& x, const integer& prime);
