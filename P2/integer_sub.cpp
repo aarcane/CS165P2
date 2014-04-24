@@ -2,7 +2,7 @@
 #include <stdexcept>
 
 integer integer::operator-(integer y)
-{	std::cout << "<operator->";
+{	//std::cout << "<operator->";
 	integer x = *this;
 	integer::normalize(x,y);
 	if(x < y) std::swap(x, y);
@@ -16,6 +16,6 @@ integer integer::operator-(integer y)
 	//if(borrow != 0) throw new std::underflow_error("Error subtracting.  Result would be negative.");
 	//y.data.back() = (unsigned int) (carry & LOW4);
 	y.minimize();
-	std::cout << "</operator->";
+	//std::cout << "</operator->";
 	return y;
 }

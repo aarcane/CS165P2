@@ -15,7 +15,7 @@ integer integer::karatsuba(const integer& x, const integer& y)
 
 	size_t div = x.data.size()/2;
 	size_t div2 = x.data.size()-div;
-	integer xlo, ylo, xhi, yhi, low, mid, high, ret;
+	integer xlo, ylo, xhi, yhi, low, mid, high;
 	xlo.data.resize(div);
 	ylo.data.resize(div);
 	xhi.data.resize(div2);
@@ -28,13 +28,11 @@ integer integer::karatsuba(const integer& x, const integer& y)
 	{	xhi.data[i] = x.data[i+div];
 		yhi.data[i] = y.data[i+div];
 	}
-
 	low = karatsuba(xlo, ylo);
 	high = karatsuba(xhi, yhi);
-	mid = (karatsuba((xlo+yhi),(xhi+ylo))-high)-low;
+	mid = (karatsuba((xlo+xhi),(ylo+yhi))-high)-low;
 
-	size_t div4 = 2*div;
+	div2 = div<<1;
 
-	ret = low + (mid << div) + (high << div4);
-	return ret;
+	return (high << div2) + (mid << div) + low;
 }

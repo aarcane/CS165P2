@@ -22,6 +22,7 @@ class integer
 	integer operator-(integer y);
 	integer operator*(integer y);
 	integer operator%(integer mod);
+	integer operator/(integer D);
 	integer operator<<(const size_t& x);
 	integer low_order_digits(const size_t & x);
 	bool operator==(const integer y);

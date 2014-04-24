@@ -1,7 +1,7 @@
 #include "integer.h"
 
 integer integer::operator+(integer y)
-{	std::cout << "<operator+>";
+{	//std::cout << "<operator+>";
 	integer x = *this;
 	integer::normalize(x,y);
 	y.data.push_back(0U);
@@ -14,6 +14,6 @@ integer integer::operator+(integer y)
 	}
 	y.data.back() = (unsigned int) (carry & LOW4);
 	y.minimize();
-	std::cout << "</operator+>";
+	//std::cout << "</operator+>";
 	return y;
 }

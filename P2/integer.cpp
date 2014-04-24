@@ -71,21 +71,16 @@ bool integer::operator< (const integer& y)
 }
 
 integer integer::operator<<(const size_t& x)
-{	std::cout << "<operator<<>";
-	std::cout << "sizes: (" << data.size() << ", " << x << ", " << data.size()+x << ")";
-	const size_t max = (size_t)(0)-(size_t)(1);
+{	const size_t max = (size_t)(0)-(size_t)(1);
 	integer ret;
 	ret.data.resize(data.size()+x, 0U);
 	for(size_t i = data.size()-1; i >= 0 && i < max; --i) ret.data[i+x] = data[i];
-	std::cout << "</operator<<>";
 	return ret;
 }
 
 integer integer::low_order_digits(const size_t& x)
-{	std::cout << "<low_order_digits>";
-	integer ret(*this);
+{	integer ret(*this);
 	ret.data.resize(x);
-	std::cout << "</low_order_digits>";
 	return ret;
 }
 
