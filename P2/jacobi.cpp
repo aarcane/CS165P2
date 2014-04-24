@@ -1,8 +1,8 @@
 #include "imath.h"
 #include "integer.h"
 
-integer J(integer& x, integer& y{
-	if(x == 1){
+integer J(integer& x, integer& y){
+	if(x == (integer)1){
 		return 1;
 	}
 	//else if(x is even){
@@ -11,4 +11,5 @@ integer J(integer& x, integer& y{
 
 	//else
 	//return J( y(mod x), x)*((-1)^(((x-1)*(y-1))/4))
+	return 1;
 }

@@ -9,7 +9,7 @@ bool isPrime(const integer& x, const integer& k)
 	return false;
 	//else 
 	//get numeric value of k
-	for(int i=0; i<k; i++){
+	for(integer i=0; i<k; i = i+(integer)1){
 		//if(GCD(random value , x) && J(random value, x) is the same as (random value^((x-1)/2))(modN)
 			//continue loop
 		//else return false
