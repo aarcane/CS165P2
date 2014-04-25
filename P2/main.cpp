@@ -1,6 +1,7 @@
 #include <iostream>
 #include "integer.h"
 #include "imath.h"
+#include <map>
 
 int primeTestLoop();
 int addTestLoop();
@@ -8,21 +9,43 @@ int subTestLoop();
 int mulTestLoop();
 int  ioTestLoop();
 int divTestLoop();
-
+void usage();
 int main(int argc, char** argv)
-{	//long long unsigned int i = 0ULL-4294967295ULL; 
-	//std::cout << (i & LOW4) << " " << ((i & HIGH4) >> 32) << std::endl;
-	return divTestLoop();
-	return ioTestLoop();
-	return mulTestLoop();
-	return subTestLoop();
-	return addTestLoop();
+{	int (*d)();
+	std::map<std::string, int (*)()> driver;
+	std::string cmd;
+	
+	//populate the driver function map
+	driver.insert(std::pair<std::string, int(*)()>("div", divTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("d",   divTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("mul", mulTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("m",   mulTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("add", addTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("a",   addTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("sub", subTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("s",   subTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("io",   ioTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("i",    ioTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("prime", primeTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("p", primeTestLoop));
+
+	//did we pass an argument?
+	if(argc == 2)
+	{	try
+		{	d = driver.at(argv[1]);
+			return d();
+		}
+		catch(std::exception e)
+		{	usage();
+			return EXIT_FAILURE;
+	}	}
+
+	//default action
 	return primeTestLoop();	
 }
 
 int primeTestLoop()
-{
-	integer i;
+{	integer i;
 	integer j;
 	do
 	{	std::cout << "Please enter a number terminated by a carriage return (0 to quit): ";
@@ -31,7 +54,7 @@ int primeTestLoop()
 		std::cout << std::endl << "the number: " << std::endl << i << std::endl;
 		if(j == integer(1)) std::cout << "is prime." << std::endl;
 		else std::cout << "is NOT prime.  The next prime number is: " <<std::endl << nextPrime(i, j) << std::endl;
-	} while(i != 0);
+	} while(!(i == (integer)0));
 	std::cout << std::endl;
 	return EXIT_SUCCESS;
 }
@@ -43,7 +66,6 @@ int addTestLoop()
 		std::cin >> i;
 		std::cout << "Please enter j: ";
 		std::cin >> j;
-		//k = 0;
 		k = i + j;
 		std::cout << "i + j: " << i << "+" << j << "=" << k << std::endl;
 	} while(!(k == integer(0)));
@@ -58,7 +80,6 @@ int subTestLoop()
                 std::cin >> i;
                 std::cout << "Please enter j: ";
                 std::cin >> j;
-                //k = 0;
                 k = i - j;
                 std::cout << "i - j: " << i << "-" << j << "=" << k << std::endl;
         } while(!(k == integer(0)));
@@ -73,7 +94,6 @@ int mulTestLoop()
                 std::cin >> i;
                 std::cout << "Please enter j: ";
                 std::cin >> j;
-                //k = 0;
                 k = i * j;
                 std::cout << "i * j: " << i << "*" << j << "=" << k << std::endl;
         } while(!(k == integer(0)));
@@ -99,10 +119,13 @@ int divTestLoop()
                 std::cin >> i;
                 std::cout << "Please enter j: ";
                 std::cin >> j;
-                //k = 0;
                 k = i / j;
                 std::cout << "i / j: " << i << "/" << j << "=" << k << std::endl;
         } while(!(i == integer(0)));
         std::cout << std::endl;
         return EXIT_SUCCESS;
+}
+
+void usage()
+{	std::cerr << "Read the README.txt" << std::endl;
 }
