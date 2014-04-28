@@ -59,19 +59,49 @@ bool integer::operator< (const integer& y)
 {	if(data.size()<y.data.size()) return true;
 	else if(y.data.size() < data.size()) return false;
 	else if(data.size() == y.data.size())
-	{	auto i = data.crbegin();
-		auto j = y.data.crbegin();
+	{	std::vector<unsigned>::const_reverse_iterator i = data.crbegin();
+		std::vector<unsigned>::const_reverse_iterator j = y.data.crbegin();
 		while(i != data.crend())
 		{	if(*i < *j) return true;
+			else if (*i > *j) return false;
 			++i;
 			++j;
-	}	}
-	else throw new std::logic_error("some unforseen error has occured.  size comparison failed.");
-	return true;
+		}
+		return false;	
+	}
+	throw new std::logic_error("some unforseen error has occured.  size comparison failed.");
+}
+
+bool integer::operator>(const integer& y)
+{       if(data.size()>y.data.size()) return true;
+        else if(y.data.size() > data.size()) return false;
+        else if(data.size() == y.data.size())
+        {       std::vector<unsigned>::const_reverse_iterator i = data.crbegin();
+                std::vector<unsigned>::const_reverse_iterator j = y.data.crbegin();
+                while(i != data.crend())
+                {       if(*i > *j) return true;
+			else if(*i < *j) return false;
+                        ++i;
+                        ++j;
+                }
+                return false;
+        }
+        throw new std::logic_error("some unforseen error has occured.  size comparison failed.");
+}
+
+bool integer::operator<=(const integer& y)
+{	return(!(*this > y));
+}
+bool integer::operator>=(const integer& y)
+{	return(!(*this < y));
+}
+bool integer::operator!=(const integer& y)
+{	return !(*this == y);
 }
 
 integer integer::operator<<(const size_t& x)
-{	const size_t max = (size_t)(0)-(size_t)(1);
+{	if(x == 0) return *this;
+	const size_t max = (size_t)(0)-(size_t)(1);
 	integer ret;
 	ret.data.resize(data.size()+x, 0U);
 	for(size_t i = data.size()-1; i >= 0 && i < max; --i) ret.data[i+x] = data[i];
@@ -79,7 +109,8 @@ integer integer::operator<<(const size_t& x)
 }
 
 integer integer::low_order_digits(const size_t& x)
-{	integer ret(*this);
+{	if(x >= data.size()) return *this;
+	integer ret(*this);
 	ret.data.resize(x);
 	return ret;
 }

@@ -21,12 +21,16 @@ class integer
 	integer operator+(integer y);
 	integer operator-(integer y);
 	integer operator*(integer y);
-	integer operator%(integer mod);
-	integer operator/(integer D);
+	integer operator%(const integer D);
+	integer operator/(const integer D);
 	integer operator<<(const size_t& x);
 	integer low_order_digits(const size_t & x);
 	bool operator==(const integer y);
 	bool operator<(const integer& y);
+	bool operator>(const integer& y);
+	bool operator>=(const integer& y);
+	bool operator<=(const integer& y);
+	bool operator!=(const integer& y);
 	integer mulmod(const integer y, const integer mod);
 	integer powmod(const integer y, const integer mod);
 	integer gcd(const integer y);
@@ -43,6 +47,7 @@ private:
 	integer(const std::vector<unsigned int>& data);	
 	static integer karatsuba(const integer& x, const integer& y);
 	std::vector<unsigned int> data;
+	std::pair<integer, integer> divide(integer N, const integer& D);
 };
 
 #endif //integer_h

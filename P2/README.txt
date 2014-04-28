@@ -25,4 +25,4 @@ cmd is one of the following:
 	jacobi	j	jacobi function
 	gcd	g	greatest common denominator
 	equal	e	super simple equality test
-	
+	compare	c	comparison < test	

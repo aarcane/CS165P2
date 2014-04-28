@@ -2,6 +2,8 @@
 #include "integer.h"
 #include "imath.h"
 #include <map>
+#include <cassert>
+#include <climits>
 
 int primeTestLoop();
 int addTestLoop();
@@ -9,25 +11,35 @@ int subTestLoop();
 int mulTestLoop();
 int  ioTestLoop();
 int divTestLoop();
+int equTestLoop();
+int cmpTestLoop();
+
 void usage();
+
+
 int main(int argc, char** argv)
 {	int (*d)();
 	std::map<std::string, int (*)()> driver;
 	std::string cmd;
 	
+	std::cout << std::abs(-100LL) << std::endl;
 	//populate the driver function map
-	driver.insert(std::pair<std::string, int(*)()>("div", divTestLoop));
-	driver.insert(std::pair<std::string, int(*)()>("d",   divTestLoop));
-	driver.insert(std::pair<std::string, int(*)()>("mul", mulTestLoop));
-	driver.insert(std::pair<std::string, int(*)()>("m",   mulTestLoop));
-	driver.insert(std::pair<std::string, int(*)()>("add", addTestLoop));
-	driver.insert(std::pair<std::string, int(*)()>("a",   addTestLoop));
-	driver.insert(std::pair<std::string, int(*)()>("sub", subTestLoop));
-	driver.insert(std::pair<std::string, int(*)()>("s",   subTestLoop));
-	driver.insert(std::pair<std::string, int(*)()>("io",   ioTestLoop));
-	driver.insert(std::pair<std::string, int(*)()>("i",    ioTestLoop));
-	driver.insert(std::pair<std::string, int(*)()>("prime", primeTestLoop));
-	driver.insert(std::pair<std::string, int(*)()>("p", primeTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("div",	divTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("d",	divTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("mul",	mulTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("m",	mulTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("add",	addTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("a",	addTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("sub",	subTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("s",	subTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("io",	ioTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("i",	ioTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("prime",	primeTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("p",	primeTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("equal", equTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("e",	equTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("cmp",	cmpTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("c",	cmpTestLoop));
 
 	//did we pass an argument?
 	if(argc == 2)
@@ -75,30 +87,30 @@ int addTestLoop()
 
 int subTestLoop()
 {       integer i = 0, j = 0, k = 0;
-        do
-        {       std::cout << "Please enter i: ";
-                std::cin >> i;
-                std::cout << "Please enter j: ";
-                std::cin >> j;
-                k = i - j;
-                std::cout << "i - j: " << i << "-" << j << "=" << k << std::endl;
-        } while(!(k == integer(0)));
-        std::cout << std::endl;
-        return EXIT_SUCCESS;
+	do
+	{       std::cout << "Please enter i: ";
+		std::cin >> i;
+		std::cout << "Please enter j: ";
+		std::cin >> j;
+		k = i - j;
+		std::cout << "i - j: " << i << "-" << j << "=" << k << std::endl;
+	} while(!(k == integer(0)));
+	std::cout << std::endl;
+	return EXIT_SUCCESS;
 }
 
 int mulTestLoop()
 {       integer i = 0, j = 0, k = 0;
-        do
-        {       std::cout << "Please enter i: ";
-                std::cin >> i;
-                std::cout << "Please enter j: ";
-                std::cin >> j;
-                k = i * j;
-                std::cout << "i * j: " << i << "*" << j << "=" << k << std::endl;
-        } while(!(k == integer(0)));
-        std::cout << std::endl;
-        return EXIT_SUCCESS;
+	do
+	{       std::cout << "Please enter i: ";
+		std::cin >> i;
+		std::cout << "Please enter j: ";
+		std::cin >> j;
+		k = i * j;
+		std::cout << "i * j: " << i << "*" << j << "=" << k << std::endl;
+	} while(!(k == integer(0)));
+	std::cout << std::endl;
+	return EXIT_SUCCESS;
 }
 
 int ioTestLoop()
@@ -113,19 +125,60 @@ int ioTestLoop()
 }
 
 int divTestLoop()
-{       integer i = 0, j = 0, k = 0;
-        do
-        {       std::cout << "Please enter i: ";
-                std::cin >> i;
-                std::cout << "Please enter j: ";
-                std::cin >> j;
-                k = i / j;
-                std::cout << "i / j: " << i << "/" << j << "=" << k << std::endl;
-        } while(!(i == integer(0)));
-        std::cout << std::endl;
-        return EXIT_SUCCESS;
+{       integer i = 0, j = 0, k = 0, l = 0, m = 0;
+	do
+	{       std::cout << "Please enter i: ";
+		std::cin >> i;
+		std::cout << "Please enter j: ";
+		std::cin >> j;
+		k = i / j;
+		std::cout << "i / j: " << i << "/" << j << "=" << k << std::endl;
+		l = i % j;
+		std::cout << "i % j: " << i << "%" << j << "=" << l << std::endl;
+		m = (k*j)+l;
+		assert(m==i);
+	} while(!(i == integer(0)));
+	std::cout << std::endl;
+	return EXIT_SUCCESS;
 }
 
+int equTestLoop()
+{	integer  i = 0, j = 0;
+	bool res;
+	do
+	{	std::cout << "Please enter i: ";
+		std::cin >> i;
+		std::cout << "Please enter j: ";
+		std::cin >> j;
+		res = (i == j);
+		std::cout << "i" << (res?"==":"!=") << "j" << std::endl;
+	} while(!(i == integer(0)));
+	std::cout << std::endl;
+	return EXIT_SUCCESS;
+}
+
+int cmpTestLoop()
+{	integer i = 0, j = 0;
+	bool res;
+	do
+	{	std::cout << "Please enter i: ";
+		std::cin >> i;
+		std::cout << "Please enter j: ";
+		std::cin >> j;
+		res = (i < j);
+		std::cout << "i" << (res?"":"!") << "<j" << std::endl;
+		res = (i <= j);
+		std::cout << "i" << (res?"":"!") << "<=j" << std::endl;
+		res = (i > j);
+		std::cout << "i" << (res?"":"!") << ">j" << std::endl;
+		res = (i >= j);
+		std::cout << "i" << (res?"":"!") << ">=j" << std::endl;
+		//std::cout << std::endl;
+
+	} while(!(i == (integer)0));
+	std::cout << std::endl;
+	return EXIT_SUCCESS;
+}
 void usage()
 {	std::cerr << "Read the README.txt" << std::endl;
 }
