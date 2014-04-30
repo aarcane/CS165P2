@@ -1,7 +1,7 @@
 #include "integer.h"
 #include <stdexcept>
 
-integer integer::operator-(integer y)
+integer integer::operator-(integer y) const
 {	integer x = *this;
 	integer::normalize(x,y);
 	if(y < x) std::swap(x, y);

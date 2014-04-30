@@ -1,10 +1,12 @@
 #include "integer.h"
 #include "imath.h"
-
+#include <cassert>
+namespace imath
+{
 //return the factor, if found, or 1 if probably prime.
 bool isPrime(const integer& x, const integer& k)
 {	
-
+	assert(x != k);
 	//if x is even
 	return false;
 	//else 
@@ -14,10 +16,6 @@ bool isPrime(const integer& x, const integer& k)
 			//continue loop
 		//else return false
 	}
-	return true; //with probability of 1-(2^-k)
+	return x == k; //with probability of 1-(2^-k)
 }
-
-
-// return the first suspected prime >= x.
-//integer nextPrime(integer x, integer prime);
-//integer nextPrime(integer x);
+}

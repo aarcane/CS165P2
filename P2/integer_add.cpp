@@ -1,9 +1,8 @@
 #include "integer.h"
 #include <cassert>
-integer integer::operator+(integer y)
+integer integer::operator+(integer y) const
 {	integer x = *this;
 	integer::normalize(x,y);
-	//y.data.push_back(0U);
 	long long unsigned int carry=0;
 	for(size_t i = 0; i < data.size(); ++i)
 	{	carry += (long long unsigned int) y.data[i];
@@ -14,6 +13,5 @@ integer integer::operator+(integer y)
 	}
 	y.data.push_back( (unsigned int) (carry & LOW4) );
 	y.minimize();
-	//std::cout << "</operator+>";
 	return y;
 }

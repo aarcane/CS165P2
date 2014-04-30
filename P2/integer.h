@@ -15,28 +15,28 @@ class integer
 	integer(std::string & i);
 
 	operator long long unsigned int() const;
-	integer& operator=(const integer i);
+	integer& operator=(const integer& i);
 
 	// Arithmetic functions
-	integer operator+(integer y);
-	integer operator-(integer y);
-	integer operator*(integer y);
-	integer operator%(const integer D);
-	integer operator/(const integer D);
-	integer operator<<(const size_t& x);
-	integer low_order_digits(const size_t & x);
-	bool operator==(const integer y);
-	bool operator<(const integer& y);
-	bool operator>(const integer& y);
-	bool operator>=(const integer& y);
-	bool operator<=(const integer& y);
-	bool operator!=(const integer& y);
-	integer mulmod(const integer y, const integer mod);
-	integer powmod(const integer y, const integer mod);
-	integer gcd(const integer y);
+	integer operator+(integer y) const;
+	integer operator-(integer y) const;
+	integer operator*(integer y) const;
+	integer operator%(const integer& D) const;
+	integer operator/(const integer& D) const;
+	integer operator<<(const size_t& x) const;
+	integer low_order_digits(const size_t & x) const;
+	bool operator==(const integer& y) const;
+	bool operator<(const integer& y) const;
+	bool operator>(const integer& y) const;
+	bool operator>=(const integer& y) const;
+	bool operator<=(const integer& y) const;
+	bool operator!=(const integer& y) const;
+	integer mulmod(const integer& y, const integer& mod) const;
+	integer powmod(const integer& y, const integer& mod) const;
+	integer gcd(const integer& y) const;
 	
 	// Friend iostream functions
-	friend std::ostream& operator<<(std::ostream& os, const integer &i);
+	friend std::ostream& operator<<(std::ostream& os, const integer& out);
 	friend std::istream& operator>>(std::istream& os, integer &i);
 
 	// Other functions
@@ -44,10 +44,10 @@ class integer
 private:
 	void minimize();
 	static void normalize(integer& x1, integer& x2);
-	integer(const std::vector<unsigned int>& data);	
+	integer(const std::vector<unsigned int>& data);
 	static integer karatsuba(const integer& x, const integer& y);
 	std::vector<unsigned int> data;
-	std::pair<integer, integer> divide(integer N, const integer& D);
+	static std::pair<integer, integer> divide(integer N, const integer& D);
 };
 
 #endif //integer_h

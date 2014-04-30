@@ -1,7 +1,7 @@
 #include "integer.h"
 #include <cassert>
 
-integer integer::operator*(integer y)
+integer integer::operator*(integer y) const
 {	integer x = *this;
 	normalize(x, y);
 	x = integer::karatsuba(x, y);

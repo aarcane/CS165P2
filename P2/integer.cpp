@@ -1,6 +1,7 @@
+#include "integer.h"
 #include <exception>
 #include <stdexcept>
-#include "integer.h"
+#include <limits>
 
 integer::integer()
 {	data.push_back(0U);
@@ -17,7 +18,7 @@ integer::integer(const integer& i)
 integer::integer(long long unsigned int i)
 {	try //assume ULL is 8 bytes long.
 	{	data.push_back((unsigned)(i & LOW4));
-		data.push_back((unsigned)((i & HIGH4) >> 32));
+		data.push_back((unsigned)((i & HIGH4) >> std::numeric_limits<unsigned int>::digits));
 	}
 	catch(std::exception e)
 	{	throw e;
@@ -32,18 +33,18 @@ integer::integer(const std::vector<unsigned int>& data)
 
 integer::operator long long unsigned int() const
 {	long long unsigned int ret = 0;
-	if(data.size() >= 2) ret |= ((long long unsigned int)(data[1]) << 32);
+	if(data.size() >= 2) ret |= ((long long unsigned int)(data[1]) << std::numeric_limits<unsigned int>::digits);
 	ret |= (long long unsigned int)(data[0]);
 	return ret;
 }
 
-integer& integer::operator= (const integer i)
+integer& integer::operator= (const integer& i)
 {	zero();
 	data = i.data;
 	return *this;
 }
 
-bool integer::operator== (const integer y)
+bool integer::operator==(const integer& y) const
 {	if(data.size() != y.data.size()) return false;
 	auto i = data.cbegin();
 	auto j = y.data.cbegin();
@@ -55,7 +56,7 @@ bool integer::operator== (const integer y)
 	return true;
 }
 
-bool integer::operator< (const integer& y)
+bool integer::operator< (const integer& y) const
 {	if(data.size()<y.data.size()) return true;
 	else if(y.data.size() < data.size()) return false;
 	else if(data.size() == y.data.size())
@@ -72,7 +73,7 @@ bool integer::operator< (const integer& y)
 	throw new std::logic_error("some unforseen error has occured.  size comparison failed.");
 }
 
-bool integer::operator>(const integer& y)
+bool integer::operator>(const integer& y) const
 {       if(data.size()>y.data.size()) return true;
         else if(y.data.size() > data.size()) return false;
         else if(data.size() == y.data.size())
@@ -89,26 +90,28 @@ bool integer::operator>(const integer& y)
         throw new std::logic_error("some unforseen error has occured.  size comparison failed.");
 }
 
-bool integer::operator<=(const integer& y)
+bool integer::operator<=(const integer& y) const
 {	return(!(*this > y));
 }
-bool integer::operator>=(const integer& y)
+
+bool integer::operator>=(const integer& y) const
 {	return(!(*this < y));
 }
-bool integer::operator!=(const integer& y)
+
+bool integer::operator!=(const integer& y) const
 {	return !(*this == y);
 }
 
-integer integer::operator<<(const size_t& x)
+integer integer::operator<<(const size_t& x) const
 {	if(x == 0) return *this;
-	const size_t max = (size_t)(0)-(size_t)(1);
+	const size_t max = std::numeric_limits<size_t>::max();
 	integer ret;
 	ret.data.resize(data.size()+x, 0U);
-	for(size_t i = data.size()-1; i >= 0 && i < max; --i) ret.data[i+x] = data[i];
+	for(size_t i = data.size()-1; i < std::numeric_limits<size_t>::max() && i < max; --i) ret.data[i+x] = data[i];
 	return ret;
 }
 
-integer integer::low_order_digits(const size_t& x)
+integer integer::low_order_digits(const size_t& x) const
 {	if(x >= data.size()) return *this;
 	integer ret(*this);
 	ret.data.resize(x);

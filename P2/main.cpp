@@ -4,7 +4,8 @@
 #include <map>
 #include <cassert>
 #include <climits>
-
+#include <stdexcept>
+#include <limits>
 int primeTestLoop();
 int addTestLoop();
 int subTestLoop();
@@ -22,7 +23,7 @@ int main(int argc, char** argv)
 	std::map<std::string, int (*)()> driver;
 	std::string cmd;
 	
-	std::cout << std::abs(-100LL) << std::endl;
+	std::cout << std::abs(-100LL) << " " << std::numeric_limits<unsigned int>::digits << std::endl;
 	//populate the driver function map
 	driver.insert(std::pair<std::string, int(*)()>("div",	divTestLoop));
 	driver.insert(std::pair<std::string, int(*)()>("d",	divTestLoop));
@@ -47,8 +48,16 @@ int main(int argc, char** argv)
 		{	d = driver.at(argv[1]);
 			return d();
 		}
-		catch(std::exception e)
+		catch(std::overflow_error& e)
+		{	std::cout << e.what();
+			return EXIT_FAILURE;
+		}
+		catch(std::exception& e)
 		{	usage();
+			return EXIT_FAILURE;
+		}
+		catch(...)
+		{	//std::cout << e.what();
 			return EXIT_FAILURE;
 	}	}
 
@@ -62,10 +71,10 @@ int primeTestLoop()
 	do
 	{	std::cout << "Please enter a number terminated by a carriage return (0 to quit): ";
 		std::cin >> i;
-		j = isPrime(i, integer(20));
+		j = imath::isPrime(i, integer(20));
 		std::cout << std::endl << "the number: " << std::endl << i << std::endl;
 		if(j == integer(1)) std::cout << "is prime." << std::endl;
-		else std::cout << "is NOT prime.  The next prime number is: " <<std::endl << nextPrime(i, j) << std::endl;
+		else std::cout << "is NOT prime.  The next prime number is: " <<std::endl << imath::nextPrime(i, j) << std::endl;
 	} while(!(i == (integer)0));
 	std::cout << std::endl;
 	return EXIT_SUCCESS;
@@ -131,9 +140,11 @@ int divTestLoop()
 		std::cin >> i;
 		std::cout << "Please enter j: ";
 		std::cin >> j;
+		std::cout << "Performing division...";
 		k = i / j;
-		std::cout << "i / j: " << i << "/" << j << "=" << k << std::endl;
 		l = i % j;
+		std::cout << "done." << std::endl;
+		std::cout << "i / j: " << i << "/" << j << "=" << k << std::endl;
 		std::cout << "i % j: " << i << "%" << j << "=" << l << std::endl;
 		m = (k*j)+l;
 		assert(m==i);
