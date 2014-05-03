@@ -25,4 +25,5 @@ cmd is one of the following:
 	jacobi	j	jacobi function
 	gcd	g	greatest common denominator
 	equal	e	super simple equality test
-	compare	c	comparison < test	
+	compare	c	comparison < test
+	rand	r	generate a random number < R

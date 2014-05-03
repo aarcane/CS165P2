@@ -14,7 +14,9 @@ int  ioTestLoop();
 int divTestLoop();
 int equTestLoop();
 int cmpTestLoop();
-
+int gcdTestLoop();
+int jacobiTestLoop();
+int randTestLoop();
 void usage();
 
 
@@ -41,6 +43,13 @@ int main(int argc, char** argv)
 	driver.insert(std::pair<std::string, int(*)()>("e",	equTestLoop));
 	driver.insert(std::pair<std::string, int(*)()>("cmp",	cmpTestLoop));
 	driver.insert(std::pair<std::string, int(*)()>("c",	cmpTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("gcd",	gcdTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("g",	gcdTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("jacobi",jacobiTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("j",	jacobiTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("rand",   randTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("r",     randTestLoop));
+
 
 	//did we pass an argument?
 	if(argc == 2)
@@ -68,13 +77,14 @@ int main(int argc, char** argv)
 int primeTestLoop()
 {	integer i;
 	integer j;
+	const integer k = 20;
 	do
 	{	std::cout << "Please enter a number terminated by a carriage return (0 to quit): ";
 		std::cin >> i;
-		j = imath::isPrime(i, integer(20));
+		j = imath::isPrime(i, k);
 		std::cout << std::endl << "the number: " << std::endl << i << std::endl;
-		if(j == integer(1)) std::cout << "is prime." << std::endl;
-		else std::cout << "is NOT prime.  The next prime number is: " <<std::endl << imath::nextPrime(i, j) << std::endl;
+		if(j == (integer)1) std::cout << "is prime." << std::endl;
+		else std::cout << "is NOT prime.  The next prime number is: " <<std::endl << imath::nextPrime(i, j, k) << std::endl;
 	} while(!(i == (integer)0));
 	std::cout << std::endl;
 	return EXIT_SUCCESS;
@@ -89,7 +99,7 @@ int addTestLoop()
 		std::cin >> j;
 		k = i + j;
 		std::cout << "i + j: " << i << "+" << j << "=" << k << std::endl;
-	} while(!(k == integer(0)));
+	} while(!(k == (integer)0));
 	std::cout << std::endl;
 	return EXIT_SUCCESS;
 }
@@ -103,7 +113,7 @@ int subTestLoop()
 		std::cin >> j;
 		k = i - j;
 		std::cout << "i - j: " << i << "-" << j << "=" << k << std::endl;
-	} while(!(k == integer(0)));
+	} while(!(k == (integer)0));
 	std::cout << std::endl;
 	return EXIT_SUCCESS;
 }
@@ -117,7 +127,7 @@ int mulTestLoop()
 		std::cin >> j;
 		k = i * j;
 		std::cout << "i * j: " << i << "*" << j << "=" << k << std::endl;
-	} while(!(k == integer(0)));
+	} while(!(k == (integer)0));
 	std::cout << std::endl;
 	return EXIT_SUCCESS;
 }
@@ -128,7 +138,7 @@ int ioTestLoop()
 	{	std::cout << "Enter any number (0 to quit): ";
 		std::cin >> i;
 		std::cout << "your number was: " << i << std::endl;
-	} while(!(i == integer(0)));
+	} while(!(i == (integer)0));
 	std::cout << std::endl;
 	return EXIT_SUCCESS;
 }
@@ -148,7 +158,7 @@ int divTestLoop()
 		std::cout << "i % j: " << i << "%" << j << "=" << l << std::endl;
 		m = (k*j)+l;
 		assert(m==i);
-	} while(!(i == integer(0)));
+	} while(!(i == (integer)0));
 	std::cout << std::endl;
 	return EXIT_SUCCESS;
 }
@@ -163,7 +173,7 @@ int equTestLoop()
 		std::cin >> j;
 		res = (i == j);
 		std::cout << "i" << (res?"==":"!=") << "j" << std::endl;
-	} while(!(i == integer(0)));
+	} while(!(i == (integer)0));
 	std::cout << std::endl;
 	return EXIT_SUCCESS;
 }
@@ -190,6 +200,65 @@ int cmpTestLoop()
 	std::cout << std::endl;
 	return EXIT_SUCCESS;
 }
+
+int gcdTestLoop()
+{       integer i = 0, j = 0, k = 0;
+	do
+	{       std::cout << "Please enter i: ";
+		std::cin >> i;
+		std::cout << "Please enter j: ";
+		std::cin >> j;
+		std::cout << "Finding GCD..." << std::flush;
+		k = i.gcd(j);
+		std::cout << "done." << std::endl;
+		std::cout << "GCD(i,j): GCD(" << i << "," << j << "): " << k << std::endl;
+	} while(!(i == (integer)0));
+	std::cout << std::endl;
+	return EXIT_SUCCESS;
+}
+
+int jacobiTestLoop() 
+{       integer i = 0, j = 0, l = 0;
+	bool k = false;
+	do      
+	{       std::cout << "Please enter i: ";
+		std::cin >> i;
+		std::cout << "Please enter j: ";
+		std::cin >> j;
+		std::cout << "Finding Jacobi..." << std::flush;
+		l = i.gcd(j);
+		if(l == (integer)1)
+		{	k = imath::jacobi(i,j);
+			std::cout << "done." << std::endl;
+			std::cout << "jacobi(i,j): jacobi(" << i << "," << j << "): " << (k?"":"-") << "1" << std::endl;
+		}
+		else
+		{	std::cout << "failed." << std::endl;
+			std::cout << "GCD(i,j): GCD(" << i << "," << j << "): " << l << std::endl;
+		}
+	} while(!(i == (integer)0));
+	std::cout << std::endl;
+	return EXIT_SUCCESS;
+}
+
+int randTestLoop()
+{	integer i = 0, j = 0;
+	bool test;
+	do
+	{	std::cout << "Please enter an upper bound i: ";
+		std::cin >> i;
+		j = integer::random(i);
+		test = (j <= i);
+		std::cout << "0 <= j <= i" << std::endl;
+		std::cout << "i: " << i << std::endl;
+		std::cout << "j: " << j << std::endl;
+		if(test) std::cout << "Verified." << std::endl;
+		else std::cout << "Unable to verify." << std::endl;
+	} while(i != (integer)0);
+	std::cout << std::endl;
+	return EXIT_SUCCESS;
+}
+
 void usage()
 {	std::cerr << "Read the README.txt" << std::endl;
 }

@@ -111,6 +111,22 @@ integer integer::operator<<(const size_t& x) const
 	return ret;
 }
 
+bool integer::even(void) const
+{	return (data[0] & 1U);
+}
+
+integer integer::gcd(integer y) const
+{	integer x = *this;
+	if(x == y) return x;
+	else if (x == (integer)1 || y == (integer)1) return (integer)1;
+	else if (x == (integer)0) return y;
+	else if (y == (integer)0) return x;
+	else
+	{	if(x > y) std::swap(y, x);
+		return x.gcd(y%x);
+	}
+}
+
 integer integer::low_order_digits(const size_t& x) const
 {	if(x >= data.size()) return *this;
 	integer ret(*this);

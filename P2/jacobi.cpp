@@ -3,16 +3,25 @@
 
 namespace imath
 {
-integer J(integer& x, integer& y){
-	if(x == (integer)1){
-		return y;
+bool jacobi(const integer& x, const integer& y)
+{	return imath::J(x, y);
+}
+bool J(const integer& x, const integer& y)
+{	bool ret = true;
+	long long unsigned int subProduct;
+	if(x == (integer)1) return ret;
+	else if(x.even())
+	{	ret = J(x/((integer)2), y);
+		subProduct = ((long long unsigned int)y.low_order_digits(1) * (long long unsigned int)y.low_order_digits(1)) - 1;
+		subProduct = subProduct >> 3; //(/ 8)
+		if(subProduct & 1ULL) ret = !ret;
 	}
-	//else if(x is even){
-		//return J(x/2,y)*((-1)^(((x-1)*(y-1))/4))
-	//}
-
-	//else
-	//return J( y(mod x), x)*((-1)^(((x-1)*(y-1))/4))
-	return 1;
+	else
+	{	ret =  J(y%x, x);
+		subProduct = (((unsigned long long int)x.low_order_digits(1))-1)*(((unsigned long long int)y.low_order_digits(1))-1);
+		subProduct = subProduct >> 2; //(/4)
+		if(subProduct & 1ULL) ret = !ret;
+	}
+	return ret;
 }
 }

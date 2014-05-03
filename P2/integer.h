@@ -33,7 +33,8 @@ class integer
 	bool operator!=(const integer& y) const;
 	integer mulmod(const integer& y, const integer& mod) const;
 	integer powmod(const integer& y, const integer& mod) const;
-	integer gcd(const integer& y) const;
+	integer gcd(integer y) const;
+	bool even(void) const;
 	
 	// Friend iostream functions
 	friend std::ostream& operator<<(std::ostream& os, const integer& out);
@@ -41,6 +42,7 @@ class integer
 
 	// Other functions
 	void zero();
+	static integer random(const integer& k);
 private:
 	void minimize();
 	static void normalize(integer& x1, integer& x2);

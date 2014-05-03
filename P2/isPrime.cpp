@@ -4,11 +4,8 @@
 namespace imath
 {
 //return the factor, if found, or 1 if probably prime.
-bool isPrime(const integer& x, const integer& k)
-{	
-	assert(x != k);
-	//if x is even
-	return false;
+integer isPrime(const integer& x, const integer& k)
+{	if(x.even()) return 2;
 	//else 
 	//get numeric value of k
 	for(integer i=0; i<k; i = i+(integer)1){
