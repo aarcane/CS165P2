@@ -1,6 +1,8 @@
 #include "integer.h"
 #include "imath.h"
 
+namespace imath
+{
 //takes in the input number and the amount to compare to.
 /*integer nextPrime(const integer& in, const integer& k){
 	while (!isPrime(in, k)){
@@ -24,4 +26,4 @@ integer nextPrime(const integer& i, const integer& prime)
 integer nextPrime(const integer& i)
 {	return nextPrime(i, isPrime(i, integer(20)));
 }
-
+}
