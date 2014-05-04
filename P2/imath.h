@@ -12,4 +12,5 @@ bool isPrime(const integer& x, const integer& k);
 // return the first suspected prime >= x.
 integer nextPrime(const integer& x, const integer& prime);
 integer nextPrime(const integer& x);
+integer GCD(const integer& random, const integer& x);
 #endif //imath.h

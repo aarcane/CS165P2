@@ -108,3 +108,8 @@ void integer::minimize()
 	while( i > 1 && data[i-1] == 0) --i;
 	data.resize(i);
 }
+
+bool isEven()
+{
+	return false;
+}
