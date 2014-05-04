@@ -84,7 +84,7 @@ int primeTestLoop()
 		j = imath::isPrime(i, k);
 		std::cout << std::endl << "the number: " << std::endl << i << std::endl;
 		if(j == (integer)1) std::cout << "is prime." << std::endl;
-		else std::cout << "is NOT prime.  The next prime number is: " <<std::endl << imath::nextPrime(i, j, k) << std::endl;
+		else std::cout << "is NOT prime.  " << std::flush << "The next prime number is: " <<std::endl << imath::nextPrime(i, j, k) << std::endl;
 	} while(!(i == (integer)0));
 	std::cout << std::endl;
 	return EXIT_SUCCESS;
@@ -225,7 +225,7 @@ int jacobiTestLoop()
 		std::cin >> i;
 		std::cout << "Please enter j: ";
 		std::cin >> j;
-		std::cout << "Finding Jacobi..." << std::flush;
+		std::cout << "Finding Jacobi..." << std::endl;
 		l = i.gcd(j);
 		if(l == (integer)1)
 		{	k = imath::jacobi(i,j);

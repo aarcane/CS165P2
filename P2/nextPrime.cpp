@@ -4,46 +4,42 @@
 
 namespace imath
 {
-//takes in the input number and the amount to compare to.
-/*integer nextPrime(const integer& in, const integer& k){
-	while (!isPrime(in, k)){
-		//if in is odd
-		in=in +2;
-		//else
-		in = in+1;
-	}
-	return in;
-
-}
-*/
-
 integer nextPrime(integer i, const integer& prime, const integer& k)
 {	integer lowP[] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97};
-	std::bitset<8192> sieve;
-	integer a;
+	std::bitset<nextPrime_sieve_size> sieve;
+	size_t a;
 	size_t b = 0;
 	if(prime == (integer)1) return i;
-	if(i.even())
-	{	i = i+(integer)1;
-		if(isPrime(i, k) == (integer)1) return i;
-	}
 	do
-	{	sieve.set();
-		sieve.reset(0);
-		for(integer p : lowP)
-		{	a = i % p;
-			do
-			{	sieve.reset(a);
-				a = a+p;
-			} while(a < (integer)8192);
+	{	
+		if(i > (integer)97)
+		{	sieve.set();
+			sieve.reset(0);
+			for(integer p : lowP)
+			{	a = p-(i % p);
+				do
+				{	//std::cout << "sieve removing " << (i + (integer)a) << std::endl;
+					sieve.reset(a);
+					a += p;
+				} while(a < nextPrime_sieve_size);
+			}
+			for(b = 0; b < nextPrime_sieve_size; ++b)
+			{	//std::cout << i + (integer)b << std::endl;
+				if(sieve.test(b))
+					if(isPrime(i + (integer)b, k) == (integer)1)
+						return i+(integer)b;
+			}
+			i = i + (integer)nextPrime_sieve_size;
 		}
-		for(b = 0; b < 8192; ++b)
-		{	if(sieve.test(b) && isPrime(i + (integer)b, k) == (integer)1) return i+(integer)b;
+		else
+		{	for(integer p: lowP)
+			{	if(p >= i) return p;
+			}
+			i = 98;//didn't find a next prime.  try again.  Wait, what?  this should never happen..  Anyway, moving on...
 		}
-		i = i + (integer)8192;
 	} while(true);
 }
 
 integer nextPrime(const integer& i, const integer& k)
-{	return nextPrime(i, isPrime(i, k));
+{	return nextPrime(i, isPrime(i, k), k);
 }}

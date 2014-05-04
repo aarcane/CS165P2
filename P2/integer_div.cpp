@@ -18,14 +18,25 @@ std::pair<integer, integer> integer::divide(integer R, const integer& D)
 	integer Q = 0;
 	integer guess = 1;
 	integer test;
-	std::stack<integer> stack;
-
+	//std::stack<integer> stack;
+	size_t guess_p = 0;
 	if(D > R) return std::pair<integer, integer>(Q, R);
-	while((guess * D) <= R)
-	{	stack.push(guess);
-		guess = guess << (size_t)1; //bitshift it up by a whole digit
+	while((guess << guess_p) <= R)
+	{	//stack.push(guess << guess_p);
+		//std::cout << guess << std::endl;
+		guess_p = guess_p+std::numeric_limits<unsigned int>::digits;
+		//guess = guess << (size_t)std::numeric_limits<unsigned int>::digits; //bitshift it up by a whole digit
 	}
-
+	//std::cout << guess << std::endl;
+	while(guess_p < std::numeric_limits<unsigned int>::max())
+	{	test = D << guess_p;
+		if(test <= R)
+		{	Q = Q + (guess << guess_p);
+			R = R - test;
+		}
+		--guess_p;
+	}
+	/*
 	while(!stack.empty())
 	{	guess = stack.top();
 		stack.pop();
@@ -33,6 +44,7 @@ std::pair<integer, integer> integer::divide(integer R, const integer& D)
 		guess.data.back() = guess.data.back()<< (std::numeric_limits<unsigned int>::digits -1); //bitshift high digit up by 31 (nominally) bits
 		for(size_t i = 0; i <= (std::numeric_limits<unsigned int>::digits - 1); ++i)
 		{	test = guess * D;
+			//std::cout << guess << std::endl;
 			if(test <= R)
 			{	Q = Q + guess;
 				R = R - test;
@@ -40,7 +52,13 @@ std::pair<integer, integer> integer::divide(integer R, const integer& D)
 			}
 			guess.data.back() = guess.data.back()>>1; //bitshift back down 1 bit.
 	}	}
+	*/
 
+	if(!(R < D))
+	{	std::cout << R << " " << D << std::endl;
+	}
 	assert(R<D);
+	Q.minimize();
+	R.minimize();
 	return std::pair<integer, integer>(Q, R);
 }

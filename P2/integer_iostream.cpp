@@ -10,12 +10,11 @@ std::ostream& operator<<(std::ostream& os, const integer& out)
 	char c;
 	std::stack<integer> st;
 	std::pair<integer, integer> div;
-	//while(i <= o)
 	do
 	{	st.push(i);
-		i = i * ten;
+		//i = i * ten;
+		i = i+i+i+i+i+i+i+i+i+i;
 	} while(i <= o);
-	//std::stack<integer> ost = st;
 	
 	//do
 	//{
@@ -26,17 +25,16 @@ std::ostream& operator<<(std::ostream& os, const integer& out)
 	{	i = st.top();
 		c = 0;
 		if(i <= o)
-		{	div = i.divide(o, i);
-			c = (char)(unsigned long long)div.first;
-		//while(o >= i)
-		//{	++c;
-		//	o = o-i;
-		//}
-			o = div.second;
+		{	//div = i.divide(o, i);
+			//c = (char)(unsigned long long)div.first;
+			//o = div.second;
+			while(o >= i)
+			{	++c;
+				o = o-i;
+			}
 		}
 		os << char(c + '0');
 		//o = div.second;
-		//i = st.top();
 		st.pop();
 	} while(!st.empty());
 /*

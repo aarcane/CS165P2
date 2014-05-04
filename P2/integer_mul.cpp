@@ -52,5 +52,5 @@ integer integer::karatsuba(const integer& x, const integer& y)
 	mid = mid-(high+low);
 
 	div2 = div * 2;
-	return (high << div2) + (mid << div) + low;
+	return (high << (div2*32)) + (mid << (div*32)) + low;
 }
