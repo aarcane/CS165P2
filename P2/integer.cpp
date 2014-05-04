@@ -102,6 +102,10 @@ bool integer::operator!=(const integer& y) const
 {	return !(*this == y);
 }
 
+bool isEven(){
+	return false;
+}
+
 integer integer::operator<<(const size_t& x) const
 {	if(x == 0) return *this;
 	const size_t max = std::numeric_limits<size_t>::max();

@@ -41,6 +41,8 @@ class integer
 
 	// Other functions
 	void zero();
+	bool isEven();
+
 private:
 	void minimize();
 	static void normalize(integer& x1, integer& x2);
