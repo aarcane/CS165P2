@@ -31,6 +31,7 @@ class integer
 	bool operator>=(const integer& y) const;
 	bool operator<=(const integer& y) const;
 	bool operator!=(const integer& y) const;
+	integer mod(const integer& mod) const;
 	integer mulmod(const integer& y, const integer& mod) const;
 	integer powmod(const integer& y, const integer& mod) const;
 	integer gcd(const integer& y) const;
