@@ -16,9 +16,13 @@ bool isPrime(const integer& x, const integer& k)
 	else {
 		//get numeric value of k
 		for(integer i=0; i<k; i = i+(integer)1){
+			//I'd like to do by 3 because we wouldn't need to check everything higher (even gets rid of everything before)
 			integer random = dshrandom(temp/(integer)3);
-			//if(GCD(random , x) && J(random value, x) is the same as (random value^((x-1)/2))(modN)
-				//continue loop
+			integer temp = random^((x-(integer)1)/(integer)2);
+			//if(GCD(random , x) == (integer)1 && J(random, x) == temp.mod(N)){
+					//continue loop
+			//}
+			
 			//else return false
 		}
 	}

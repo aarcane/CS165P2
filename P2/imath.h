@@ -12,5 +12,7 @@ namespace imath
 	// return the first suspected prime >= x.
 	integer nextPrime(const integer& x, const integer& prime);
 	integer nextPrime(const integer& x);
+	integer GCD(const integer& rand, const integer& x);
+	integer J(integer& x, integer& y);
 }
 #endif //imath.h
