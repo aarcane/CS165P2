@@ -3,7 +3,7 @@
 
 namespace imath
 {
-integer J(integer& x, integer& y){
+integer J(const integer& x, const integer& y){
 	if(x == (integer)1){
 		return y;
 	}

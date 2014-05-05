@@ -19,11 +19,12 @@ bool isPrime(const integer& x, const integer& k)
 			//I'd like to do by 3 because we wouldn't need to check everything higher (even gets rid of everything before)
 			integer random = dshrandom(temp/(integer)3);
 			integer temp = random^((x-(integer)1)/(integer)2);
-			//if(GCD(random , x) == (integer)1 && J(random, x) == temp.mod(N)){
+			if(GCD(random , x) == (integer)1 && J(random, x) == temp.mod(x)){
 					//continue loop
-			//}
-			
-			//else return false
+			}
+			else{
+				return false;
+			}
 		}
 	}
 	return x == k; //with probability of 1-(2^-k)

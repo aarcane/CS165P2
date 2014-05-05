@@ -13,6 +13,6 @@ namespace imath
 	integer nextPrime(const integer& x, const integer& prime);
 	integer nextPrime(const integer& x);
 	integer GCD(const integer& rand, const integer& x);
-	integer J(integer& x, integer& y);
+	integer J(const integer& x, const integer& y);
 }
 #endif //imath.h
