@@ -26,10 +26,6 @@ integer::integer()
 {	data.push_back(0U);
 }
 
-integer::~integer()
-{	zero();
-}
-
 integer::integer(const integer& i)
 {	data = i.data;
 }
@@ -58,8 +54,7 @@ integer::operator long long unsigned int() const
 }
 
 integer& integer::operator= (const integer& i)
-{	zero();
-	data = i.data;
+{	data = i.data;
 	return *this;
 }
 
@@ -127,7 +122,7 @@ integer integer::operator<<(const size_t& x) const
 	const size_t max = std::numeric_limits<size_t>::max();
 	integer ret;
 	ret.data.resize(data.size()+x, 0U);
-	for(size_t i = data.size()-1; i < std::numeric_limits<size_t>::max() && i < max; --i) ret.data[i+x] = data[i];
+	for(size_t i = data.size()-1; i < max; --i) ret.data[i+x] = data[i];
 	return ret;
 }
 */
@@ -136,17 +131,22 @@ integer integer::operator<<(const size_t& x) const
 {	if(x == 0) return *this;
 	const size_t i = x % std::numeric_limits<unsigned int>::digits;
 	const size_t j = x / std::numeric_limits<unsigned int>::digits;
-	integer ret;
-	//unsigned int low_bits;
-	if(i > 0) ret.data.resize(data.size()+j+1);
-	else ret.data.resize(data.size()+j+1);
-	//low_bits = 0;
+	integer ret = 0;
+	//std::cout << "<< : " << x << " " << i << " " << j << std::endl;
+	ret.data.resize(data.size()+j+1);
+	//ret.data.resize(data.size()+j+1);
 	//std::cout << "test" << std::endl;
+	//std::cout << data.size() << std::endl;
 	for(size_t k = 0; k < data.size(); ++k)
-	{	ret.data[k+j] |=(data[k]<<i);
+	{	//std::cout << k << std::endl;
+		//std::cout << "test 2" << std::endl;
+		ret.data[k+j] |=(data[k]<<i);
+		//std::cout << "test 3" << std::endl;
 		ret.data[k+j+1] = (data[k] & highBitMask[i]) >> (std::numeric_limits<unsigned int>::digits - i);
+		//std::cout << "test 4" << std::endl;
 		//std::cout << ret << std::endl;
 	}
+	//std::cout << "test 5" << std::endl;
 	//ret.data.back() = ret.data.back()|low_bits;
 	ret.minimize();
 	return ret;
@@ -156,16 +156,18 @@ integer integer::operator>>(const size_t& x) const
 {	if(x == 0) return *this;
 	const size_t i = x % std::numeric_limits<unsigned int>::digits;
 	const size_t j = x / std::numeric_limits<unsigned int>::digits;
-	integer ret;
-	ret.data.resize(data.size()-j, 0U);
+	integer ret = 0;
+	size_t newsize = (data.size() <= j)?1:data.size()-j;
 	try
-	{	for(size_t k = 0; k < ret.data.size(); ++k)
-		{	ret.data[k] = data[k+j] >> x;
+	{	ret.data.resize(newsize, 0U);
+		for(size_t k = 0; k < ret.data.size(); ++k)
+		{	ret.data[k] = data[k+j] >> i;
 			ret.data[k] = (((data.at(k+j+1) & lowBitMask[i]) << (std::numeric_limits<unsigned int>::digits - i)) & highBitMask[i]) | ret.data[k];
 		}
 	}
-	catch (std::out_of_range e){}
-	catch(std::overflow_error e){}
+	catch (std::out_of_range& e){}
+	catch(std::overflow_error& e){}
+	catch(std::exception& e){std::cerr << e.what() << std::endl;}
 	ret.minimize();
 	return ret;
 }
@@ -196,14 +198,6 @@ integer integer::low_order_digits(const size_t& x) const
 	return ret;
 }
 
-void integer::zero()
-{
-	#ifdef INTEGER_CRYPTO
-	for(size_t i = data.size(); i >= 0; --i) data[i] = 0;
-	data.resize(0);
-	#endif //INTEGER_CRYPTO
-}
-
 void integer::normalize(integer& x1, integer& x2)
 {	size_t newsize = std::max(x1.data.size(), x2.data.size());
 	x1.data.resize(newsize, 0U);
@@ -212,6 +206,10 @@ void integer::normalize(integer& x1, integer& x2)
 
 void integer::minimize()
 {	size_t i = data.size();
-	while( i > 1 && data[i-1] == 0) --i;
+	//std::cout << "i" << std::endl;
+	while( i > 1 && i < std::numeric_limits<size_t>::max())
+		if(data[i-1] == 0) --i;
+		else break;
 	data.resize(i);
+	//while( data.size() > 1 && data.back() == 0 ) data.resize(data.size()-1);
 }

@@ -9,12 +9,12 @@
 class integer
 {public:
 	integer();
-	~integer();
 	integer(const integer& i);
 	integer(const long long unsigned int);
-	integer(std::string & i);
+	integer(const std::string& i);
 
 	operator long long unsigned int() const;
+	operator std::string() const;
 	integer& operator=(const integer& i);
 
 	// Arithmetic functions
@@ -43,15 +43,15 @@ class integer
 	friend std::istream& operator>>(std::istream& os, integer &i);
 
 	// Other functions
-	void zero(void);
 	static integer random(const integer& k);
+	static std::pair<integer, integer> divide(integer N, const integer& D);
 private:
 	void minimize(void);
 	static void normalize(integer& x1, integer& x2);
 	integer(const std::vector<unsigned int>& data);
 	static integer karatsuba(const integer& x, const integer& y);
 	std::vector<unsigned int> data;
-	static std::pair<integer, integer> divide(integer N, const integer& D);
+	//static std::pair<integer, integer> divide(integer N, const integer& D);
 	static const unsigned int lowBitMask[];
 	/* = {0x0U,		0x00000001U,	0x00000003U,	0x00000007U,	0x0000000FU, 
 								0x0000001FU,	0x0000003FU,	0x0000007FU,	0x000000FFU,

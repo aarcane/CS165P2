@@ -15,27 +15,33 @@ integer integer::operator/ (const integer& D) const
 }
 std::pair<integer, integer> integer::divide(integer R, const integer& D)
 {	if(D == (integer)0 ) throw new std::overflow_error("Division by zero!");
+	integer R_initial = R;
 	integer Q = 0;
 	integer guess = 1;
 	integer test;
 	//std::stack<integer> stack;
 	size_t guess_p = 0;
 	if(D > R) return std::pair<integer, integer>(Q, R);
-	while((guess << guess_p) <= R)
+	
+	while((D << guess_p) <= R)
 	{	//stack.push(guess << guess_p);
-		//std::cout << guess << std::endl;
+		//std::cout << (guess << guess_p) << std::endl;
 		guess_p = guess_p+std::numeric_limits<unsigned int>::digits;
 		//guess = guess << (size_t)std::numeric_limits<unsigned int>::digits; //bitshift it up by a whole digit
 	}
+	//guess = stack.top();
 	//std::cout << guess << std::endl;
+	
 	while(guess_p < std::numeric_limits<unsigned int>::max())
-	{	test = D << guess_p;
+	{	test = (D << guess_p);
 		if(test <= R)
-		{	Q = Q + (guess << guess_p);
-			R = R - test;
+		{	Q = (Q + (guess << guess_p));
+			R = (R - test);
 		}
 		--guess_p;
 	}
+	
+	
 	/*
 	while(!stack.empty())
 	{	guess = stack.top();
@@ -55,7 +61,7 @@ std::pair<integer, integer> integer::divide(integer R, const integer& D)
 	*/
 
 	if(!(R < D))
-	{	std::cout << R << " " << D << std::endl;
+	{	//std::cout << R << " " << D << " " << R_initial<< std::endl;
 	}
 	assert(R<D);
 	Q.minimize();

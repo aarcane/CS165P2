@@ -6,6 +6,9 @@
 #include <climits>
 #include <stdexcept>
 #include <limits>
+#include "extra.h"
+#include "mpz_test.cpp"
+
 int primeTestLoop();
 int addTestLoop();
 int subTestLoop();
@@ -17,6 +20,7 @@ int cmpTestLoop();
 int gcdTestLoop();
 int jacobiTestLoop();
 int randTestLoop();
+int bsTestLoop();
 void usage();
 
 
@@ -24,8 +28,8 @@ int main(int argc, char** argv)
 {	int (*d)();
 	std::map<std::string, int (*)()> driver;
 	std::string cmd;
-	
-	std::cout << std::abs(-100LL) << " " << std::numeric_limits<unsigned int>::digits << std::endl;
+	std::cout << std::numeric_limits<size_t>::digits << std::endl;
+	std::cout << extra::hb(10000) << std::endl;
 	//populate the driver function map
 	driver.insert(std::pair<std::string, int(*)()>("div",	divTestLoop));
 	driver.insert(std::pair<std::string, int(*)()>("d",	divTestLoop));
@@ -47,9 +51,11 @@ int main(int argc, char** argv)
 	driver.insert(std::pair<std::string, int(*)()>("g",	gcdTestLoop));
 	driver.insert(std::pair<std::string, int(*)()>("jacobi",jacobiTestLoop));
 	driver.insert(std::pair<std::string, int(*)()>("j",	jacobiTestLoop));
-	driver.insert(std::pair<std::string, int(*)()>("rand",   randTestLoop));
-	driver.insert(std::pair<std::string, int(*)()>("r",     randTestLoop));
-
+	driver.insert(std::pair<std::string, int(*)()>("rand",	randTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("r",	randTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("b",	bsTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("bitshift",bsTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("mpz",	mpz_test_loop));
 
 	//did we pass an argument?
 	if(argc == 2)
@@ -84,8 +90,11 @@ int primeTestLoop()
 		j = imath::isPrime(i, k);
 		std::cout << std::endl << "the number: " << std::endl << i << std::endl;
 		if(j == (integer)1) std::cout << "is prime." << std::endl;
-		else std::cout << "is NOT prime.  " << std::flush << "The next prime number is: " <<std::endl << imath::nextPrime(i, j, k) << std::endl;
-	} while(!(i == (integer)0));
+		else
+		{	std::cout << "is NOT prime.  " << std::endl;
+			std::cout << "The next prime number is: " <<std::endl << imath::nextPrime(i, j, k) << std::endl;
+		}
+	} while(i != (integer)0);
 	std::cout << std::endl;
 	return EXIT_SUCCESS;
 }
@@ -99,7 +108,7 @@ int addTestLoop()
 		std::cin >> j;
 		k = i + j;
 		std::cout << "i + j: " << i << "+" << j << "=" << k << std::endl;
-	} while(!(k == (integer)0));
+	} while(k != (integer)0);
 	std::cout << std::endl;
 	return EXIT_SUCCESS;
 }
@@ -113,7 +122,7 @@ int subTestLoop()
 		std::cin >> j;
 		k = i - j;
 		std::cout << "i - j: " << i << "-" << j << "=" << k << std::endl;
-	} while(!(k == (integer)0));
+	} while(k != (integer)0);
 	std::cout << std::endl;
 	return EXIT_SUCCESS;
 }
@@ -127,7 +136,7 @@ int mulTestLoop()
 		std::cin >> j;
 		k = i * j;
 		std::cout << "i * j: " << i << "*" << j << "=" << k << std::endl;
-	} while(!(k == (integer)0));
+	} while(k != (integer)0);
 	std::cout << std::endl;
 	return EXIT_SUCCESS;
 }
@@ -138,7 +147,7 @@ int ioTestLoop()
 	{	std::cout << "Enter any number (0 to quit): ";
 		std::cin >> i;
 		std::cout << "your number was: " << i << std::endl;
-	} while(!(i == (integer)0));
+	} while(i != (integer)0);
 	std::cout << std::endl;
 	return EXIT_SUCCESS;
 }
@@ -158,7 +167,7 @@ int divTestLoop()
 		std::cout << "i % j: " << i << "%" << j << "=" << l << std::endl;
 		m = (k*j)+l;
 		assert(m==i);
-	} while(!(i == (integer)0));
+	} while(i != (integer)0);
 	std::cout << std::endl;
 	return EXIT_SUCCESS;
 }
@@ -173,7 +182,7 @@ int equTestLoop()
 		std::cin >> j;
 		res = (i == j);
 		std::cout << "i" << (res?"==":"!=") << "j" << std::endl;
-	} while(!(i == (integer)0));
+	} while(i != (integer)0);
 	std::cout << std::endl;
 	return EXIT_SUCCESS;
 }
@@ -196,7 +205,7 @@ int cmpTestLoop()
 		std::cout << "i" << (res?"":"!") << ">=j" << std::endl;
 		//std::cout << std::endl;
 
-	} while(!(i == (integer)0));
+	} while(i != (integer)0);
 	std::cout << std::endl;
 	return EXIT_SUCCESS;
 }
@@ -212,7 +221,7 @@ int gcdTestLoop()
 		k = i.gcd(j);
 		std::cout << "done." << std::endl;
 		std::cout << "GCD(i,j): GCD(" << i << "," << j << "): " << k << std::endl;
-	} while(!(i == (integer)0));
+	} while(i != (integer)0);
 	std::cout << std::endl;
 	return EXIT_SUCCESS;
 }
@@ -236,7 +245,7 @@ int jacobiTestLoop()
 		{	std::cout << "failed." << std::endl;
 			std::cout << "GCD(i,j): GCD(" << i << "," << j << "): " << l << std::endl;
 		}
-	} while(!(i == (integer)0));
+	} while(i != (integer)0);
 	std::cout << std::endl;
 	return EXIT_SUCCESS;
 }
@@ -257,6 +266,23 @@ int randTestLoop()
 	} while(i != (integer)0);
 	std::cout << std::endl;
 	return EXIT_SUCCESS;
+}
+
+int bsTestLoop()
+{       integer i = 0, j = 0;
+	size_t k = 0;
+        //do
+        {       std::cout << "Please enter an i: ";
+                std::cin >> i;
+		std::cout << "Please enter a k: ";
+		std::cin >> k;
+                j = i >> k;
+                std::cout << i << " >> " << k << " = " << j << std::endl;
+		j = i << k;
+		std::cout << i << " << " << k << " = " << j << std::endl;
+        };// while(i != (integer)0);
+        std::cout << std::endl;
+        return EXIT_SUCCESS;
 }
 
 void usage()

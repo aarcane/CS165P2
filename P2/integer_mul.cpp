@@ -1,5 +1,6 @@
 #include "integer.h"
 #include <cassert>
+#include <limits>
 
 integer integer::operator*(integer y) const
 {	integer x = *this;
@@ -15,7 +16,7 @@ integer integer::karatsuba(const integer& x, const integer& y)
 	if(x.data.size() == 1)
 	{	return *(new integer((long long unsigned int)(x.data[0]) * (long long unsigned int)(y.data[0])));
 	}
-
+	
 	//declarations
 	size_t i;
 	size_t div;	// = x.data.size()/2;
@@ -28,6 +29,7 @@ integer integer::karatsuba(const integer& x, const integer& y)
 	std::swap(div, div2);
 	assert(x.data.size() == div+div2);
 	assert(div == div2 || div == div2-1 || div == div2+1);
+	assert(div >= div2);
 	xlo.data.resize(div, 0U);
 	ylo.data.resize(div, 0U);
 	xhi.data.resize(div2, 0U);
@@ -52,5 +54,5 @@ integer integer::karatsuba(const integer& x, const integer& y)
 	mid = mid-(high+low);
 
 	div2 = div * 2;
-	return (high << (div2*32)) + (mid << (div*32)) + low;
+	return (high << (div2 * std::numeric_limits<unsigned int>::digits)) + (mid << (div * std::numeric_limits<unsigned int>::digits)) + low;
 }
