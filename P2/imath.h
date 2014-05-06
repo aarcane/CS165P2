@@ -3,9 +3,7 @@
 
 #include "integer.h"
 namespace imath
-{	//return the result of the jacobi function
-	integer jacobi(integer x, integer y);
-
+{	
 	//return the factor, if found, or 1 if probably prime.
 	bool isPrime(const integer& x, const integer& k);
 
