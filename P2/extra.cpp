@@ -96,17 +96,22 @@ size_t next_pow_2(const size_t& t)
 size_t hb(const size_t& t)
 {	size_t highest = std::numeric_limits<size_t>::digits -1;
 	size_t lowest = 0;
+	size_t oldguess = std::numeric_limits<size_t>::max();
 	size_t guess = (highest+lowest)/2;
+	if(t == 0) return 1;
 	while(highest != lowest)
 	{	if((t & size_t_highMask[guess]))
 		{	lowest = guess;
 		}
 		else
-		{	highest = guess - 1;
+		{	highest = guess;
 		}
+		oldguess = guess;
 		guess = (highest + lowest) / 2;
+		if(guess == oldguess) {++guess; ++lowest;}
 	}
-	return 1 << guess;
+	//guess = std::min(guess, guess - 1);
+	return 1 << (guess - 1);
 }
 
 }

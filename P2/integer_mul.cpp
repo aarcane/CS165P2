@@ -1,6 +1,7 @@
 #include "integer.h"
 #include <cassert>
 #include <limits>
+#include "extra.h"
 
 integer integer::operator*(integer y) const
 {	integer x = *this;
@@ -10,11 +11,11 @@ integer integer::operator*(integer y) const
 	return x;
 }
 
-integer integer::karatsuba(const integer& x, const integer& y)
-{	assert(x.data.size() == y.data.size());
+integer integer::karatsuba(const integer& X, const integer& Y)
+{	assert(X.data.size() == Y.data.size());
 
-	if(x.data.size() == 1)
-	{	return *(new integer((long long unsigned int)(x.data[0]) * (long long unsigned int)(y.data[0])));
+	if(X.data.size() == 1)
+	{	return *(new integer((long long unsigned int)(X.data[0]) * (long long unsigned int)(Y.data[0])));
 	}
 	
 	//declarations
@@ -24,12 +25,19 @@ integer integer::karatsuba(const integer& x, const integer& y)
 	integer xlo, ylo, xhi, yhi, xsum, ysum, low, mid, high;
 
 	//initialization
-	div = x.data.size()/2;
+	integer x = X;
+	integer y = Y;
+	//size_t digits = extra::hb(x.data.size());
+	if(extra::hb(x.data.size()) != x.data.size())
+	{	x.data.resize(extra::next_pow_2(x.data.size()), 0U);
+		y.data.resize(extra::next_pow_2(x.data.size()), 0U);
+	}
+	div = x.data.size() >> 1;
 	div2 = x.data.size()-div;
 	std::swap(div, div2);
-	assert(x.data.size() == div+div2);
-	assert(div == div2 || div == div2-1 || div == div2+1);
-	assert(div >= div2);
+	//assert(x.data.size() == div+div2);
+	assert(div == div2);
+	//assert(div >= div2);
 	xlo.data.resize(div, 0U);
 	ylo.data.resize(div, 0U);
 	xhi.data.resize(div2, 0U);

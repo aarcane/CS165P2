@@ -6,6 +6,7 @@
 #include <iostream>
 #include <string>
 #include <utility>
+#include <cstdlib>
 
 namespace
 {
@@ -32,16 +33,10 @@ bool operator==(const integer& b, const mpz_class& a)
 
 bool simpleEqualityTestLoop(integer k, const integer& max)
 {	for(; k > (integer)1; k = k -(integer)1)
-	{	//std::cout << k << std::endl;
-		integer x = integer::random(max);
-		//std::string X = (std::string)x;
+	{	integer x = integer::random(max);
 		mpz_class y = copy(x);
-		//mpz_class y = (mpz_class)X;
-		//std::string X = (std::string)x;
-		//std::string Y = y.get_str();
-		//std::cout << X << ", " << Y << std::endl;
 		if(x == y) continue;
-		//return false;
+		return false;
 	}
 	return true;
 }
@@ -103,7 +98,7 @@ int mpz_test_loop()
 		if(!simpleSumTestLoop(runs, upper_limit)) std::cout << "Simple Sum Test Loop failed." << std::endl;
 		else std::cout << "Simple Sum Test Loop passed." << std::endl;
 	
-		if(!simpleMulTestLoop(runs, upper_limit)) std::cout << "Simple Mul Test Loop failed." << std::endl;
+		if(!simpleMulTestLoop(runs, upper_limit)) {std::cout << "Simple Mul Test Loop failed." << std::endl; return EXIT_FAILURE;}
 		else std::cout << "Simple Mul Test Loop passed." << std::endl;
 		
 		if(!simpleDivTestLoop(runs, upper_limit)) std::cout << "Simple Div Test Loop failed." << std::endl;

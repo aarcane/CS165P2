@@ -8,6 +8,7 @@
 #include <limits>
 #include "extra.h"
 #include "mpz_test.cpp"
+#include <cstdlib>
 
 int primeTestLoop();
 int addTestLoop();
@@ -28,8 +29,11 @@ int main(int argc, char** argv)
 {	int (*d)();
 	std::map<std::string, int (*)()> driver;
 	std::string cmd;
-	std::cout << std::numeric_limits<size_t>::digits << std::endl;
-	std::cout << extra::hb(10000) << std::endl;
+	//std::cout << std::numeric_limits<size_t>::digits << std::endl;
+	//std::cout << extra::hb(10000) << std::endl;
+	//for(size_t i = 0; i < (size_t)std::numeric_limits<size_t>::digits; ++i)
+	//	std::cout << extra::hb((size_t)1 << i) << std::endl;
+	//std::cout << extra::hb(0) << std::endl;
 	//populate the driver function map
 	driver.insert(std::pair<std::string, int(*)()>("div",	divTestLoop));
 	driver.insert(std::pair<std::string, int(*)()>("d",	divTestLoop));
