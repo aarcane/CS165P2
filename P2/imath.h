@@ -8,6 +8,7 @@ namespace imath
 	//implementation of the jacobi function.
 	bool J(const integer& x, const integer& y);
 
+
 	//return the factor, if found, or 1 if probably prime.
 	integer isPrime(const integer& x, const integer& k);
 
@@ -17,5 +18,8 @@ namespace imath
 	integer nextPrime(const integer& x, const integer& k);
 	
 	integer b_pow_N_minus_1_mod_N(const integer& b, const integer& N);
+	integer nextPrime(const integer& x, const integer& prime);
+	integer nextPrime(const integer& x);
+	integer GCD(const integer& rand, const integer& x);
 }
 #endif //imath.h

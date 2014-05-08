@@ -24,5 +24,4 @@ bool J(const integer& x, const integer& y)
 		if(subProduct & 1ULL) ret = !ret;
 	}
 	return ret;
-}
-}
+}}

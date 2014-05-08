@@ -32,6 +32,7 @@ class integer
 	bool operator>=(const integer& y) const;
 	bool operator<=(const integer& y) const;
 	bool operator!=(const integer& y) const;
+	integer mod(const integer& mod) const;
 	integer mulmod(const integer& y, const integer& mod) const;
 	integer powmod(const integer& y, const integer& mod) const;
 	integer gcd(integer y) const;
@@ -45,6 +46,9 @@ class integer
 	// Other functions
 	static integer random(const integer& k);
 	static std::pair<integer, integer> divide(integer N, const integer& D);
+	void zero();
+	bool isEven();
+
 private:
 	void minimize(void);
 	static void normalize(integer& x1, integer& x2);

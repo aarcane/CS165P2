@@ -1,5 +1,6 @@
 #include "integer.h"
 #include "imath.h"
+#include "randGen.h"
 #include <cassert>
 
 namespace imath
@@ -9,6 +10,29 @@ integer isPrime(const integer& x, const integer& k)
 {	if(x.even())
 	{	if(x == (integer)2) return 1;
 		else return 2;
+/*
+bool isPrime(const integer& x, const integer& k)
+{	
+	assert(x != k);
+	//if x is even
+	integer temp = x;
+	if(temp.isEven()){
+		return false;
+	}
+	else {
+		//get numeric value of k
+		for(integer i=0; i<k; i = i+(integer)1){
+			//I'd like to do by 3 because we wouldn't need to check everything higher (even gets rid of everything before)
+			integer random = dshrandom(temp/(integer)3);
+			integer temp = random^((x-(integer)1)/(integer)2);
+			if(GCD(random , x) == (integer)1 && J(random, x) == temp.mod(x)){
+					//continue loop
+			}
+			else{
+				return false;
+			}
+		}
+*/
 	}
 	integer b;
 	for(integer i=k; i>(integer)0; i = i-(integer)1)
