@@ -7,7 +7,7 @@
 #include <stdexcept>
 #include <limits>
 #include "extra.h"
-#include "mpz_test.cpp"
+#include "mpz_test.h"
 #include <cstdlib>
 
 int primeTestLoop();
@@ -29,11 +29,7 @@ int main(int argc, char** argv)
 {	int (*d)();
 	std::map<std::string, int (*)()> driver;
 	std::string cmd;
-	//std::cout << std::numeric_limits<size_t>::digits << std::endl;
-	//std::cout << extra::hb(10000) << std::endl;
-	//for(size_t i = 0; i < (size_t)std::numeric_limits<size_t>::digits; ++i)
-	//	std::cout << extra::hb((size_t)1 << i) << std::endl;
-	//std::cout << extra::hb(0) << std::endl;
+
 	//populate the driver function map
 	driver.insert(std::pair<std::string, int(*)()>("div",	divTestLoop));
 	driver.insert(std::pair<std::string, int(*)()>("d",	divTestLoop));
@@ -87,10 +83,11 @@ int main(int argc, char** argv)
 int primeTestLoop()
 {	integer i;
 	integer j;
-	const integer k = 20;
+	const integer k(20);
 	do
 	{	std::cout << "Please enter a number terminated by a carriage return (0 to quit): ";
 		std::cin >> i;
+		if(i == integer(0)) break;
 		j = imath::isPrime(i, k);
 		std::cout << std::endl << "the number: " << std::endl << i << std::endl;
 		if(j == (integer)1) std::cout << "is prime." << std::endl;
@@ -118,9 +115,9 @@ int addTestLoop()
 }
 
 int subTestLoop()
-{       integer i = 0, j = 0, k = 0;
+{	integer i = 0, j = 0, k = 0;
 	do
-	{       std::cout << "Please enter i: ";
+	{	std::cout << "Please enter i: ";
 		std::cin >> i;
 		std::cout << "Please enter j: ";
 		std::cin >> j;
@@ -132,12 +129,14 @@ int subTestLoop()
 }
 
 int mulTestLoop()
-{       integer i = 0, j = 0, k = 0;
+{	integer i = 0, j = 0, k = 0;
 	do
-	{       std::cout << "Please enter i: ";
+	{	std::cout << "Please enter i: ";
 		std::cin >> i;
+		if(i == integer(0)) break;
 		std::cout << "Please enter j: ";
 		std::cin >> j;
+		if(j == integer(0)) break;
 		k = i * j;
 		std::cout << "i * j: " << i << "*" << j << "=" << k << std::endl;
 	} while(k != (integer)0);
@@ -157,13 +156,14 @@ int ioTestLoop()
 }
 
 int divTestLoop()
-{       integer i = 0, j = 0, k = 0, l = 0, m = 0;
+{	integer i = 0, j = 0, k = 0, l = 0, m = 0;
 	do
-	{       std::cout << "Please enter i: ";
+	{	std::cout << "Please enter i: ";
 		std::cin >> i;
 		std::cout << "Please enter j: ";
 		std::cin >> j;
 		std::cout << "Performing division...";
+		if(j == integer(0)) break;
 		k = i / j;
 		l = i % j;
 		std::cout << "done." << std::endl;
@@ -215,15 +215,13 @@ int cmpTestLoop()
 }
 
 int gcdTestLoop()
-{       integer i = 0, j = 0, k = 0;
+{	integer i = 0, j = 0, k = 0;
 	do
-	{       std::cout << "Please enter i: ";
+	{	std::cout << "Please enter i: ";
 		std::cin >> i;
 		std::cout << "Please enter j: ";
 		std::cin >> j;
-		std::cout << "Finding GCD..." << std::flush;
 		k = i.gcd(j);
-		std::cout << "done." << std::endl;
 		std::cout << "GCD(i,j): GCD(" << i << "," << j << "): " << k << std::endl;
 	} while(i != (integer)0);
 	std::cout << std::endl;
@@ -231,10 +229,10 @@ int gcdTestLoop()
 }
 
 int jacobiTestLoop() 
-{       integer i = 0, j = 0, l = 0;
+{	integer i = 0, j = 0, l = 0;
 	bool k = false;
 	do      
-	{       std::cout << "Please enter i: ";
+	{	std::cout << "Please enter i: ";
 		std::cin >> i;
 		std::cout << "Please enter j: ";
 		std::cin >> j;
@@ -273,20 +271,20 @@ int randTestLoop()
 }
 
 int bsTestLoop()
-{       integer i = 0, j = 0;
+{	integer i = 0, j = 0;
 	size_t k = 0;
-        //do
-        {       std::cout << "Please enter an i: ";
-                std::cin >> i;
+	//do
+	{	std::cout << "Please enter an i: ";
+		std::cin >> i;
 		std::cout << "Please enter a k: ";
 		std::cin >> k;
-                j = i >> k;
-                std::cout << i << " >> " << k << " = " << j << std::endl;
+		j = i >> k;
+		std::cout << i << " >> " << k << " = " << j << std::endl;
 		j = i << k;
 		std::cout << i << " << " << k << " = " << j << std::endl;
-        };// while(i != (integer)0);
-        std::cout << std::endl;
-        return EXIT_SUCCESS;
+	};// while(i != (integer)0);
+	std::cout << std::endl;
+	return EXIT_SUCCESS;
 }
 
 void usage()

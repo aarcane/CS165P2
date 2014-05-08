@@ -1,7 +1,5 @@
-#ifndef MPZ_TEST_CPP
-#define MPZ_TEST_CPP
-
 #include "integer.h"
+#include "mpz_test.h"
 #include <gmpxx.h>
 #include <iostream>
 #include <string>
@@ -9,7 +7,7 @@
 #include <cstdlib>
 #include <bitset>
 
-namespace
+namespace mpz_test
 {
 mpz_class copy(const integer& i)
 {	std::string s = (std::string)i;
@@ -27,7 +25,6 @@ bool operator==(const mpz_class& a, const integer& b)
 	return (A == B);
 }
 
-}
 bool operator==(const integer& b, const mpz_class& a)
 {	return (a == b);
 }
@@ -193,6 +190,30 @@ bool simpleMulTestLoop(integer k, const integer& max)
 	return ret;
 }
 
+bool singleDigitMulTestLoop(integer k, const integer& max)
+{	bool ret = true;
+	static const integer max2 = ((integer)1 << (size_t)32)-(integer)1;
+	for(; k > (integer)0; k = k - (integer)1)
+	{	integer a = integer::random(max);
+		integer b = integer::random(max2);
+		integer c = a * b;
+		mpz_class d = copy(a);
+		mpz_class e = copy(b);
+		mpz_class f = d * e;
+		if(c == f) continue;
+		//return false;
+		std::cerr << "ERROR: Failed on test #" << k << std::endl;
+		std::cerr << a << "*" << b << "=" << c << std::endl;
+		std::cerr << d << "*" << e << "=" << f << std::endl;
+		std::cerr << copy(f) << std::endl;
+		std::cerr << "====================" << std::endl;
+		return false;
+		ret = false;
+	}
+	return ret;
+}
+
+
 bool simpleDivTestLoop(integer k, const integer& max)
 {	for(; k > (integer)1; k=k-(integer)1)
 	{	integer a = integer::random(max);
@@ -217,37 +238,39 @@ bool simpleDivTestLoop(integer k, const integer& max)
 	return true;
 }
 
+}
 int mpz_test_loop()
-{	integer runs = 1000;
-	size_t digits = 10;
+{	integer runs = 100;
+	size_t digits = 1;
 	while(true)
 	{	integer upper_limit = (((integer)1 << ((size_t)32 * digits))) - (integer)1;
 		std::cout << "Testing with " << runs << " passes on  " << digits << " digit numbers:" << std::endl;
-/*
-		if(!simpleEqualityTestLoop(runs, upper_limit)) std::cerr << "Simple equality test loop failed." << std::endl;
+
+		if(!mpz_test::simpleEqualityTestLoop(runs, upper_limit)) std::cerr << "Simple equality test loop failed." << std::endl;
 		else std::cout << "Simple Equality Test Loop passed." << std::endl;
 
-		if(!simpleCmpTestLoop(runs, upper_limit)) std::cerr << "Simple compare test loop failed." << std::endl;
+		if(!mpz_test::simpleCmpTestLoop(runs, upper_limit)) std::cerr << "Simple compare test loop failed." << std::endl;
 		else std::cout << "Simple compare Test Loop passed." << std::endl;
 
-		if(!simpleSumTestLoop(runs, upper_limit)) std::cerr << "Simple Sum Test Loop failed." << std::endl;
+		if(!mpz_test::simpleSumTestLoop(runs, upper_limit)) std::cerr << "Simple Sum Test Loop failed." << std::endl;
 		else std::cout << "Simple Sum Test Loop passed." << std::endl;
 
-		if(!simpleSubTestLoop(runs, upper_limit)) std::cerr << "Simple subtraction test loop failed." << std::endl;
+		if(!mpz_test::simpleSubTestLoop(runs, upper_limit)) std::cerr << "Simple subtraction test loop failed." << std::endl;
 		else std::cout << "Simple subtraction Test Loop passed." << std::endl;
 
-		if(!simpleBsTestLoop(runs, upper_limit)) std::cerr << "Simple bitshift test loop failed." << std::endl;
+		if(!mpz_test::simpleBsTestLoop(runs, upper_limit)) std::cerr << "Simple bitshift test loop failed." << std::endl;
 		else std::cout << "Simple bitshift Test Loop passed." << std::endl;
-*/
-		if(!simpleMulTestLoop(runs, upper_limit)) {std::cerr << "Simple Mul Test Loop failed." << std::endl;}
+
+		if(!mpz_test::simpleMulTestLoop(runs, upper_limit)) {std::cerr << "Simple Mul Test Loop failed." << std::endl;}
 		else std::cout << "Simple Mul Test Loop passed." << std::endl;
-/*
-		if(!simpleDivTestLoop(runs, upper_limit)) std::cerr << "Simple Div Test Loop failed." << std::endl;
+
+		if(!mpz_test::singleDigitMulTestLoop(runs, upper_limit)) {std::cerr << "Single Digit Mul Test Loop failed." << std::endl;}
+		else std::cout << "Single Digit Mul Test Loop passed." << std::endl;
+
+		if(!mpz_test::simpleDivTestLoop(runs, upper_limit)) std::cerr << "Simple Div Test Loop failed." << std::endl;
 		else std::cout << "Simple Div Test Loop passed." << std::endl;
-*/
+
 		++digits;
 	}
 	return EXIT_SUCCESS;
 }
-
-#endif

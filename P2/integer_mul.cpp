@@ -2,6 +2,7 @@
 #include <cassert>
 #include <limits>
 #include "extra.h"
+#include "mpz_test.h"
 
 /*integer integer::operator*(integer y) const
 {	integer x = *this;
@@ -16,8 +17,9 @@ integer integer::operator*(integer y) const
 	if(y < x) std::swap(x,y);
 	if(x == (integer)0) return (integer)0;
 	if(x.data.size() == 1) return single_digit_multiply(x, y);
+	//return long_multiply(x, y);
 	return karatsuba(x, y);
-	return (integer)1;
+	//return (integer)1;
 }
 integer integer::single_digit_multiply(const integer& x, const integer& y)
 {	integer ret = 0;
@@ -35,9 +37,36 @@ integer integer::single_digit_multiply(const integer& x, const integer& y)
 	ret.minimize();
 	return ret;
 }
+integer integer::long_multiply(const integer& x, const integer& y)
+{	using namespace mpz_test;
+	integer ret, temp, shift;
+	ret = 0;
+	mpz_class x2, y2, ret2, temp2, shift2;
+	ret2 = 0;
+	x2 = copy(x);
+	y2 = copy(y);
+	for(size_t i(0); i < x.data.size(); ++i)
+	{	temp.data.resize(1, 0U);
+		temp.data[0] = x.data[i];
+		temp2 = copy(temp);
+		temp = (temp * y);
+		temp2 = (temp2*y2);
+		assert(temp == temp2);
+		assert(ret == ret2 && "Before bitshift+Sum");
+		shift = temp << ((size_t)32 * i);
+		shift2 = temp2 << ((size_t)32 * i);
+		assert(shift == shift2);
+		ret = ret + shift;
+		ret2 = ret2 + shift2;
+		//if(!(ret == ret2)) std::cerr << ret << "!+" << copy(ret2) << std::endl;
+		assert(ret == ret2 && "After bitshift+Sum");
+	}
+	//ret.minimize();
+	return ret;
+}
 integer integer::karatsuba(const integer& x, const integer& y)
 {	integer xlo,xhi,ylo,yhi,low,mid1,mid2,high,tmp;
-	size_t div = y.data.size()>>1; //2
+	size_t div = y.data.size() / 2; //>>1; //2
 
 	ylo.data = std::vector<unsigned int>(y.data.cbegin(), y.data.cbegin()+div);
 	yhi.data = std::vector<unsigned int>(y.data.cbegin()+div, y.data.cend());
@@ -58,11 +87,10 @@ integer integer::karatsuba(const integer& x, const integer& y)
 	yhi.minimize();
 	low = xlo*ylo;
 	high = xhi*yhi;
-	//mid = (xhi*ylo)+(xlo*yhi);
 	mid1 = (xhi+xlo)*(yhi+ylo);
 	mid2 = (high + low);
 	//tmp = high+low;
-	//assert(mid2 < mid1);
+	assert(mid2 < mid1);
 	//mid = mid - tmp;
 	return (high << (div * 2 * std::numeric_limits<unsigned int>::digits)) + low + (mid1 << (div * std::numeric_limits<unsigned int>::digits)) - (mid2 << (div * std::numeric_limits<unsigned int>::digits));
 	return xlo;

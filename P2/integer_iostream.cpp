@@ -4,52 +4,6 @@
 #include <stack>
 #include <utility>
 #include <string>
-/*
-std::ostream& operator<<(std::ostream& os, const integer& out)
-{	
-	integer o = out;
-	integer i = 1;
-	integer ten = 10;
-	char c;
-	std::stack<integer> st;
-	std::pair<integer, integer> div;
-	do
-	{	st.push(i);
-		//i = i * ten;
-		i = i+i+i+i+i+i+i+i+i+i;
-	} while(i <= o);
-	
-	//do
-	//{
-		//i = st.top();
-		//st.pop();
-	//} while(i >= o);
-	do
-	{	i = st.top();
-		st.pop();
-		c = 0;
-		
-		if(i <= o)
-		{	div = i.divide(o, i);
-			c = (char)(unsigned long long)div.first;
-			o = div.second;
-		}
-		
-		//while(i <= o)
-		//{	++c;
-		//	o = o-i;
-		//}
-		
-		os << char(c + '0');
-		//o = div.second;
-	} while(!st.empty());
-	#ifndef NDEBUG
-	os << "(";
-	for(size_t j = out.data.size()-1; j > 0; --j) os << out.data[j] << ", ";
-	os << out.data[0] << ")";
-	#endif
-	return os;
-}*/
 
 std::ostream& operator<<(std::ostream& os, const integer& out)
 {	os << (std::string)out;
@@ -76,12 +30,6 @@ integer::operator std::string() const
 		//i = i * ten;
 		i = i+i+i+i+i+i+i+i+i+i;
 	} while(i <= o);
-	//st.push(i);
-	//do
-	//{
-		//i = st.top();
-		//st.pop();
-	//} while(i >= o);
 	do
 	{	i = st.top();
 		st.pop();
@@ -101,27 +49,6 @@ integer::operator std::string() const
 	} while(!st.empty());
 	return ret;
 }
-
-/* std::istream& operator>>(std::istream& is, integer& i)
-{	char c = 0;
-	integer r = 0;
-	const integer ten = 10;
-	bool success = false;
-	is.get(c);
-	while(c <= '9' && c >= '0')
-	{	success = true;
-		c -= '0';
-		//r = (r*ten)+(integer)c;
-		r = (r+r+r+r+r+r+r+r+r+r)+(integer)c;
-		is.get(c);
-	}
-	if(success) (void)0;
-		//i = r;
-	else is.setstate(std::ios_base::failbit);
-	i = r;
-	return is;
-}
-*/
 
 std::istream& operator>>(std::istream& is, integer& i)
 {	char c = 0;
@@ -148,9 +75,9 @@ integer::integer(const std::string & s)
 	integer r = 0;
 	const integer ten = 10;
 	for(auto c = s.cbegin(); c!=s.cend() && *c <= '9' && *c >= '0'; ++c)
-	{	//c -= '0'; 
-		//r = (r*ten)+(integer)*c;
-		r = (r+r+r+r+r+r+r+r+r+r)+(integer)((*c) - '0');
+	{	//*c -= '0';
+		r = (r*ten)+(integer)((*c) - '0');
+		//r = (r+r+r+r+r+r+r+r+r+r)+(integer)((*c) - '0');
 	}	
 	std::swap(data, r.data);
 }

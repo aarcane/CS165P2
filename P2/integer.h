@@ -53,8 +53,9 @@ private:
 	void minimize(void);
 	static void normalize(integer& x1, integer& x2);
 	integer(const std::vector<unsigned int>& data);
-	static integer karatsuba(const integer& x, const integer& y);
 	static integer single_digit_multiply(const integer& x, const integer& y);
+	static integer long_multiply(const integer& x, const integer& y);
+	static integer karatsuba(const integer& x, const integer& y);
 	std::vector<unsigned int> data;
 	static const long long unsigned int LOW4;
 	static const long long unsigned int HIGH4;

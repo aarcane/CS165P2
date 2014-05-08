@@ -130,7 +130,7 @@ integer integer::operator<<(const size_t& x) const
 	const size_t i = x % std::numeric_limits<unsigned int>::digits;
 	const size_t j = x / std::numeric_limits<unsigned int>::digits;
 	integer ret = 0;
-	ret.data.resize(data.size()+j+1);
+	ret.data.resize(data.size()+j+1, 0U);
 	for(size_t k = 0; k < data.size(); ++k)
 	{	ret.data[k+j] |=(data[k]<<i);
 		ret.data[k+j+1] = (data[k] & highBitMask[i]) >> (std::numeric_limits<unsigned int>::digits - i);

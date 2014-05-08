@@ -60,9 +60,6 @@ std::pair<integer, integer> integer::divide(integer R, const integer& D)
 	}	}
 	*/
 
-	if(!(R < D))
-	{	//std::cout << R << " " << D << " " << R_initial<< std::endl;
-	}
 	assert(R<D);
 	Q.minimize();
 	R.minimize();
