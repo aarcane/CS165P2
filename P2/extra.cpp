@@ -98,7 +98,7 @@ size_t hb(const size_t& t)
 	size_t lowest = 0;
 	size_t oldguess = std::numeric_limits<size_t>::max();
 	size_t guess = (highest+lowest)/2;
-	if(t == 0) return 1;
+	if(t == 0 || t == 1) return 1;
 	while(highest != lowest)
 	{	if((t & size_t_highMask[guess]))
 		{	lowest = guess;

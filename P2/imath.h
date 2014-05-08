@@ -12,7 +12,7 @@ namespace imath
 	integer isPrime(const integer& x, const integer& k);
 
 	// return the first suspected prime >= x.
-	const size_t nextPrime_sieve_size = 100;
+	const size_t nextPrime_sieve_size = 8192;
 	integer nextPrime(integer x, const integer& prime, const integer& k);
 	integer nextPrime(const integer& x, const integer& k);
 	

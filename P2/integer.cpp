@@ -2,6 +2,11 @@
 #include <exception>
 #include <stdexcept>
 #include <limits>
+#include <vector>
+
+const long long unsigned int integer::LOW4 = 0xFFFFFFFFull;
+const long long unsigned int integer::HIGH4 = 0xFFFFFFFF00000000ull;
+
 
 const unsigned int integer::lowBitMask[] = {0x0U,	0x00000001U,	0x00000003U,	0x00000007U,	0x0000000FU,
 							0x0000001FU,	0x0000003FU,	0x0000007FU,	0x000000FFU,
@@ -35,7 +40,7 @@ integer::integer(long long unsigned int i)
 	{	data.push_back((unsigned)(i & LOW4));
 		data.push_back((unsigned)((i & HIGH4) >> std::numeric_limits<unsigned int>::digits));
 	}
-	catch(std::exception e)
+	catch(std::exception& e)
 	{	throw e;
 	}
 	minimize();
@@ -116,38 +121,16 @@ bool integer::operator!=(const integer& y) const
 {	return !(*this == y);
 }
 
-/*
-integer integer::operator<<(const size_t& x) const
-{	if(x == 0) return *this;
-	const size_t max = std::numeric_limits<size_t>::max();
-	integer ret;
-	ret.data.resize(data.size()+x, 0U);
-	for(size_t i = data.size()-1; i < max; --i) ret.data[i+x] = data[i];
-	return ret;
-}
-*/
-
 integer integer::operator<<(const size_t& x) const
 {	if(x == 0) return *this;
 	const size_t i = x % std::numeric_limits<unsigned int>::digits;
 	const size_t j = x / std::numeric_limits<unsigned int>::digits;
 	integer ret = 0;
-	//std::cout << "<< : " << x << " " << i << " " << j << std::endl;
 	ret.data.resize(data.size()+j+1);
-	//ret.data.resize(data.size()+j+1);
-	//std::cout << "test" << std::endl;
-	//std::cout << data.size() << std::endl;
 	for(size_t k = 0; k < data.size(); ++k)
-	{	//std::cout << k << std::endl;
-		//std::cout << "test 2" << std::endl;
-		ret.data[k+j] |=(data[k]<<i);
-		//std::cout << "test 3" << std::endl;
+	{	ret.data[k+j] |=(data[k]<<i);
 		ret.data[k+j+1] = (data[k] & highBitMask[i]) >> (std::numeric_limits<unsigned int>::digits - i);
-		//std::cout << "test 4" << std::endl;
-		//std::cout << ret << std::endl;
 	}
-	//std::cout << "test 5" << std::endl;
-	//ret.data.back() = ret.data.back()|low_bits;
 	ret.minimize();
 	return ret;
 }
@@ -206,10 +189,8 @@ void integer::normalize(integer& x1, integer& x2)
 
 void integer::minimize()
 {	size_t i = data.size();
-	//std::cout << "i" << std::endl;
 	while( i > 1 && i < std::numeric_limits<size_t>::max())
 		if(data[i-1] == 0) --i;
 		else break;
 	data.resize(i);
-	//while( data.size() > 1 && data.back() == 0 ) data.resize(data.size()-1);
 }

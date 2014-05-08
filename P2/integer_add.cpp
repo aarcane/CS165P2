@@ -1,5 +1,6 @@
 #include "integer.h"
 #include <cassert>
+#include <limits>
 integer integer::operator+(integer y) const
 {	integer x = *this;
 	integer::normalize(x,y);
@@ -8,10 +9,11 @@ integer integer::operator+(integer y) const
 	{	carry += (long long unsigned int) y.data[i];
 		carry += (long long unsigned int) x.data[i];
 		y.data[i] = (unsigned int) (carry & LOW4);
-		carry =  carry >> 32; //crop off low order 32 bits.
+		carry =  carry >> std::numeric_limits<unsigned int>::digits; //crop off low order 32 bits.
 		assert(carry == 1ULL || carry == 0ULL);
 	}
-	y.data.push_back( (unsigned int) (carry & LOW4) );
+	//y.data.push_back( (unsigned int) (carry & LOW4) );
+	if(carry) y.data.push_back(carry);
 	y.minimize();
 	return y;
 }
