@@ -148,7 +148,7 @@ bool simpleBsTestLoop(integer k, const integer& max)
 		mpz_class e;
 		mpz_class f;
 
-		static const size_t bs_sizes[] = {0, 1, 2, 29, 30, 31, 32, 33, 62, 63, 64, 65, 66, 95, 96, 97, 127, 128, 129, 351, 352, 353, 383, 384, 385, 607, 608, 609, 767, 768, 769};
+		static const size_t bs_sizes[] = {0, 1, 2, 29, 30, 31, 32, 33, 62, 63, 64, 65, 66, 95, 96, 97, 127, 128, 129, 351, 352, 353, 383, 384, 385, 767, 768, 769};
 		for(size_t i : bs_sizes)
 		{	if(((integer)1 << i ) > max) continue;
 			b = a << i;
@@ -226,19 +226,19 @@ int mpz_test_loop()
 /*
 		if(!simpleEqualityTestLoop(runs, upper_limit)) std::cerr << "Simple equality test loop failed." << std::endl;
 		else std::cout << "Simple Equality Test Loop passed." << std::endl;
-*/
+
 		if(!simpleCmpTestLoop(runs, upper_limit)) std::cerr << "Simple compare test loop failed." << std::endl;
 		else std::cout << "Simple compare Test Loop passed." << std::endl;
-/*
+
 		if(!simpleSumTestLoop(runs, upper_limit)) std::cerr << "Simple Sum Test Loop failed." << std::endl;
 		else std::cout << "Simple Sum Test Loop passed." << std::endl;
-*/
+
 		if(!simpleSubTestLoop(runs, upper_limit)) std::cerr << "Simple subtraction test loop failed." << std::endl;
 		else std::cout << "Simple subtraction Test Loop passed." << std::endl;
 
 		if(!simpleBsTestLoop(runs, upper_limit)) std::cerr << "Simple bitshift test loop failed." << std::endl;
 		else std::cout << "Simple bitshift Test Loop passed." << std::endl;
-
+*/
 		if(!simpleMulTestLoop(runs, upper_limit)) {std::cerr << "Simple Mul Test Loop failed." << std::endl;}
 		else std::cout << "Simple Mul Test Loop passed." << std::endl;
 /*

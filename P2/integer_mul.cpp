@@ -14,7 +14,7 @@
 integer integer::operator*(integer y) const
 {	integer x = *this;
 	if(y < x) std::swap(x,y);
-	if(y == (integer)0) return (integer)0;
+	if(x == (integer)0) return (integer)0;
 	if(x.data.size() == 1) return single_digit_multiply(x, y);
 	return karatsuba(x, y);
 	return (integer)1;
@@ -36,7 +36,7 @@ integer integer::single_digit_multiply(const integer& x, const integer& y)
 	return ret;
 }
 integer integer::karatsuba(const integer& x, const integer& y)
-{	integer xlo,xhi,ylo,yhi,low,mid,high,tmp;
+{	integer xlo,xhi,ylo,yhi,low,mid1,mid2,high,tmp;
 	size_t div = y.data.size()>>1; //2
 
 	ylo.data = std::vector<unsigned int>(y.data.cbegin(), y.data.cbegin()+div);
@@ -59,11 +59,12 @@ integer integer::karatsuba(const integer& x, const integer& y)
 	low = xlo*ylo;
 	high = xhi*yhi;
 	//mid = (xhi*ylo)+(xlo*yhi);
-	mid = (xhi+xlo)*(yhi+ylo) - high - low;
+	mid1 = (xhi+xlo)*(yhi+ylo);
+	mid2 = (high + low);
 	//tmp = high+low;
-	//assert(tmp < mid);
+	//assert(mid2 < mid1);
 	//mid = mid - tmp;
-	return (high << (div * 2 * std::numeric_limits<unsigned int>::digits)) + (mid << (div * std::numeric_limits<unsigned int>::digits)) + low;
+	return (high << (div * 2 * std::numeric_limits<unsigned int>::digits)) + low + (mid1 << (div * std::numeric_limits<unsigned int>::digits)) - (mid2 << (div * std::numeric_limits<unsigned int>::digits));
 	return xlo;
 }
 
