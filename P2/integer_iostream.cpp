@@ -76,8 +76,8 @@ integer::integer(const std::string & s)
 	const integer ten = 10;
 	for(auto c = s.cbegin(); c!=s.cend() && *c <= '9' && *c >= '0'; ++c)
 	{	//*c -= '0';
-		r = (r*ten)+(integer)((*c) - '0');
-		//r = (r+r+r+r+r+r+r+r+r+r)+(integer)((*c) - '0');
+		//r = (r*ten)+(integer)((*c) - '0');
+		r = (r+r+r+r+r+r+r+r+r+r)+(integer)((*c) - '0');
 	}	
 	std::swap(data, r.data);
 }

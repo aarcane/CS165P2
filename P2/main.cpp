@@ -9,6 +9,7 @@
 #include "extra.h"
 #include "mpz_test.h"
 #include <cstdlib>
+#include "timeTest.h"
 
 int primeTestLoop();
 int addTestLoop();
@@ -56,6 +57,8 @@ int main(int argc, char** argv)
 	driver.insert(std::pair<std::string, int(*)()>("b",	bsTestLoop));
 	driver.insert(std::pair<std::string, int(*)()>("bitshift",bsTestLoop));
 	driver.insert(std::pair<std::string, int(*)()>("mpz",	mpz_test_loop));
+	driver.insert(std::pair<std::string, int(*)()>("time",timeTest::timeTestLoop));
+	driver.insert(std::pair<std::string, int(*)()>("t",	timeTest::timeTestLoop));
 
 	//did we pass an argument?
 	if(argc == 2)
@@ -88,6 +91,7 @@ int primeTestLoop()
 	{	std::cout << "Please enter a number terminated by a carriage return (0 to quit): ";
 		std::cin >> i;
 		if(i == integer(0)) break;
+		if(std::cin.fail()) break;
 		j = imath::isPrime(i, k);
 		std::cout << std::endl << "the number: " << std::endl << i << std::endl;
 		if(j == (integer)1) std::cout << "is prime." << std::endl;

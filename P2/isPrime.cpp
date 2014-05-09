@@ -1,6 +1,5 @@
 #include "integer.h"
 #include "imath.h"
-#include "randGen.h"
 #include <cassert>
 
 namespace imath
